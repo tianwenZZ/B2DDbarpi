@@ -47,3 +47,14 @@ data_B2D0D0Pi2b2b:
     # for helicity angle
     # ...
 
+    # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
+    "D1K_ProbNNk_corr": "D1K_ProbNNk"
+    "D1K_ProbNNpi_corr": "D1K_ProbNNpi"
+    "D2K_ProbNNk_corr": "D2K_ProbNNk"
+    "D2K_ProbNNpi_corr": "D2K_ProbNNpi"
+    "D1H_ProbNNpi_corr": "D1H_ProbNNpi"
+    "D1H_ProbNNk_corr": "D1H_ProbNNk"
+    "D2H_ProbNNpi_corr": "D2H_ProbNNpi"
+    "D2H_ProbNNk_corr": "D2H_ProbNNk"
+    "BH_ProbNNpi_corr": "BH_ProbNNpi"
+    "BH_ProbNNk_corr": "BH_ProbNNk"

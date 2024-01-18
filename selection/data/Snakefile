@@ -1,7 +1,6 @@
 import os
 from os.path import isfile, join
 import yaml
-include: 'helpers.smk'
 
 
 #workpath=os.path.dirname(workflow.snakefile)

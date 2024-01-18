@@ -65,3 +65,11 @@ B2DstpDmpi:
     "DdH_ProbNNpi_corr": "DdH_ProbNNpi"
     "Ddh_ProbNNpi_corr" : "Ddh_ProbNNpi"
     "BH_ProbNNpi_corr": "BH_ProbNNpi"
+
+    "DstD0K_ProbNNpi_corr": "DstD0K_ProbNNpi"
+    "DstD0H_ProbNNk_corr": "DstD0H_ProbNNk"
+    "DstH_ProbNNk_corr": "DstH_ProbNNk"
+    "DdK_ProbNNpi_corr": "DdK_ProbNNpi"
+    "DdH_ProbNNk_corr": "DdH_ProbNNk"
+    "Ddh_ProbNNk_corr" : "Ddh_ProbNNk"
+    "BH_ProbNNk_corr": "BH_ProbNNk"

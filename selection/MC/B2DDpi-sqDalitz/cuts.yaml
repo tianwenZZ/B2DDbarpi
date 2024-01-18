@@ -1,0 +1,46 @@
+MC_B2DDpi-sqDalitz:
+
+  # trigger
+  "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
+  "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
+  "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
+
+  # truthmath
+  "particle_trueid": "abs(D1K_TRUEID)==321 && abs(D1H_TRUEID)==211 && abs(D1h_TRUEID)==211 \
+                     && abs(D2H_TRUEID)==211 && abs(D2K_TRUEID)==321 && abs(D2h_TRUEID)==211 \
+                     && abs(BH_TRUEID)==211 && abs(D1_TRUEID)==411 && abs(D2_TRUEID)==411"
+  "mother_trueid": "D1_MC_MOTHER_ID==B_TRUEID && D2_MC_MOTHER_ID==B_TRUEID && BH_MC_MOTHER_ID==B_TRUEID \
+                    && D1K_MC_MOTHER_ID==D1_TRUEID && D1H_MC_MOTHER_ID==D1_TRUEID && D1h_MC_MOTHER_ID==D1_TRUEID \
+                    && D2K_MC_MOTHER_ID==D2_TRUEID && D2H_MC_MOTHER_ID==D2_TRUEID && D2h_MC_MOTHER_ID==D2_TRUEID"
+  "mother_key": "D1K_MC_MOTHER_KEY==D1H_MC_MOTHER_KEY && D1K_MC_MOTHER_KEY==D1h_MC_MOTHER_KEY \
+                && D2H_MC_MOTHER_KEY==D2K_MC_MOTHER_KEY && D2H_MC_MOTHER_KEY==D2h_MC_MOTHER_KEY \
+                && D1_MC_MOTHER_KEY==D2_MC_MOTHER_KEY && D2_MC_MOTHER_KEY==BH_MC_MOTHER_KEY"
+
+  #DaVinci
+  "DaVinci_pid_cut_K": "D1K_ProbNNk_corr>0.1 && D1K_ProbNNk_corr<1 \
+                        && D2K_ProbNNk_corr>0.1 && D2K_ProbNNk_corr<1"
+  "DaVinci_pid_cut_pi": "D1H_ProbNNpi_corr>0.05 && D1H_ProbNNpi_corr<1 \
+                        && D1h_ProbNNpi_corr>0.05 && D1h_ProbNNpi_corr<1 \
+                        && D2H_ProbNNpi_corr>0.05 && D2H_ProbNNpi_corr<1 \
+                        && D2h_ProbNNpi_corr>0.05 && D2h_ProbNNpi_corr<1 \
+                        && BH_ProbNNpi_corr>0.05 && BH_ProbNNpi_corr<1"
+
+  # preselection:
+  "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"
+  "D candidates": "D1_IPCHI2_OWNPV<100000 && D1_IPCHI2_OWNPV>0 && D2_IPCHI2_OWNPV<100000 && D2_IPCHI2_OWNPV>0 && D1_M>1850 && D1_M<1890 && D2_M>1850 && D2_M<1890"
+  "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
+  "Charged tracks eta": "calculateEta(D1_PZ, D1_P)>2 && calculateEta(D1_PZ, D1_P)<5 \
+                        && calculateEta(D2_PZ, D2_P)>2 && calculateEta(D2_PZ, D2_P)<5 \
+                        && calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5\
+                        && calculateEta(D1K_PZ, D1K_P)>2 && calculateEta(D1K_PZ, D1K_P)<5 \
+                        && calculateEta(D1H_PZ, D1H_P)>2 && calculateEta(D1H_PZ, D1H_P)<5 \
+                        && calculateEta(D1h_PZ, D1h_P)>2 && calculateEta(D1h_PZ, D1h_P)<5 \
+                        && calculateEta(D2K_PZ, D2K_P)>2 && calculateEta(D2K_PZ, D2K_P)<5 \
+                        && calculateEta(D2H_PZ, D2H_P)>2 && calculateEta(D2H_PZ, D2H_P)<5 \
+                        && calculateEta(D2h_PZ, D2h_P)>2 && calculateEta(D2h_PZ, D2h_P)<5 "
+  "Charged tracks ipchi2": "D1K_IPCHI2_OWNPV<100000 && D1K_IPCHI2_OWNPV>0 \
+                            && D1H_IPCHI2_OWNPV<100000 && D1H_IPCHI2_OWNPV>0 \
+                            && D1h_IPCHI2_OWNPV<100000 && D1h_IPCHI2_OWNPV\
+                            && D2K_IPCHI2_OWNPV<100000 && D2K_IPCHI2_OWNPV>0 \
+                            && D2H_IPCHI2_OWNPV<100000 && D2H_IPCHI2_OWNPV>0 \
+                            && D2h_IPCHI2_OWNPV<100000 && D2h_IPCHI2_OWNPV"
