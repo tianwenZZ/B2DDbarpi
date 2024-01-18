@@ -1,0 +1,60 @@
+MC_B2DstDstpi-sqDalitz:
+  #DaVinci
+  "DaVinci_pid_cut_K": "Dst1D0K_ProbNNk_corr>0.1 && Dst1D0K_ProbNNk_corr<1 \
+                        && Dst2D0K_ProbNNk_corr>0.1 && Dst2D0K_ProbNNk_corr<1"
+  "DaVinci_pid_cut_pi": "Dst1D0H_ProbNNpi_corr>0.05 && Dst1D0H_ProbNNpi_corr<1 \
+                        && Dst1H_ProbNNpi_corr>0.05 && Dst1H_ProbNNpi_corr<1 \
+                        && Dst2D0H_ProbNNpi_corr>0.05 && Dst2D0H_ProbNNpi_corr<1 \
+                        && Dst2H_ProbNNpi_corr>0.05 && Dst2H_ProbNNpi_corr<1 \
+                        && BH_ProbNNpi_corr>0.05 && BH_ProbNNpi_corr<1"
+
+  # trigger
+  "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
+  "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
+  "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
+
+  # truthmath
+  "particle_trueid": "abs(Dst1D0K_TRUEID)==321 && abs(Dst1D0H_TRUEID)==211 && abs(Dst1H_TRUEID)==211 \
+                     && abs(Dst2D0H_TRUEID)==211 && abs(Dst2D0K_TRUEID)==321 && abs(Dst2H_TRUEID)==211 \
+                     && abs(BH_TRUEID)==211 && abs(Dst1_TRUEID)==413 && abs(Dst1D0_TRUEID)==421 && abs(Dst2_TRUEID)==413 && abs(Dst2D0_TRUEID)==421"
+  "mother_trueid": "Dst1_MC_MOTHER_ID==B_TRUEID && Dst2_MC_MOTHER_ID==B_TRUEID && BH_MC_MOTHER_ID==B_TRUEID \
+                    && Dst1D0_MC_MOTHER_ID==Dst1_TRUEID && Dst1H_MC_MOTHER_ID==Dst1_TRUEID\
+                    && Dst1D0K_MC_MOTHER_ID==Dst1D0_TRUEID && Dst1D0H_MC_MOTHER_ID==Dst1D0_TRUEID\
+                    && Dst2D0_MC_MOTHER_ID==Dst2_TRUEID && Dst2H_MC_MOTHER_ID==Dst2_TRUEID\
+                    && Dst2D0K_MC_MOTHER_ID==Dst2D0_TRUEID && Dst2D0H_MC_MOTHER_ID==Dst2D0_TRUEID"
+  "mother_key": "Dst1D0K_MC_MOTHER_KEY==Dst1D0H_MC_MOTHER_KEY\
+                && Dst1D0_MC_MOTHER_KEY==Dst1H_MC_MOTHER_KEY
+                && Dst2D0K_MC_MOTHER_KEY==Dst2D0H_MC_MOTHER_KEY && Dst2D0_MC_MOTHER_KEY==Dst2H_MC_MOTHER_KEY \
+                && Dst1_MC_MOTHER_KEY==Dst2_MC_MOTHER_KEY && Dst1_MC_MOTHER_KEY==BH_MC_MOTHER_KEY"
+
+
+
+  # preselection:
+  "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"
+  "D candidates": "Dst1_IPCHI2_OWNPV<100000 && Dst1_IPCHI2_OWNPV>0 \
+                  && Dst2_IPCHI2_OWNPV<100000 && Dst2_IPCHI2_OWNPV>0 \
+                  && Dst1D0_IPCHI2_OWNPV<100000 && Dst1D0_IPCHI2_OWNPV>0 \
+                  && Dst2D0_IPCHI2_OWNPV<100000 && Dst2D0_IPCHI2_OWNPV>0 \
+                  && Dst1D0_M>1845 && Dst1D0_M<1885 \
+                  && Dst2D0_M>1845 && Dst2D0_M<1885 \
+                  && Dst1_M>1990 && Dst1_M<2030 \
+                  && Dst2_M>1990 && Dst2_M<2030" 
+  "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
+  "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
+                        && calculateEta(Dst1D0K_PZ, Dst1D0K_P)>2 && calculateEta(Dst1D0K_PZ, Dst1D0K_P)<5 \
+                        && calculateEta(Dst1D0H_PZ, Dst1D0H_P)>2 && calculateEta(Dst1D0H_PZ, Dst1D0H_P)<5 \
+                        && calculateEta(Dst2D0K_PZ, Dst2D0K_P)>2 && calculateEta(Dst2D0K_PZ, Dst2D0K_P)<5 \
+                        && calculateEta(Dst2D0H_PZ, Dst2D0H_P)>2 && calculateEta(Dst2D0H_PZ, Dst2D0H_P)<5\
+                        && calculateEta(Dst1H_PZ, Dst1H_P)>2 && calculateEta(Dst1H_PZ, Dst1H_P)<5\
+                        && calculateEta(Dst2H_PZ, Dst2H_P)>2 && calculateEta(Dst2H_PZ, Dst2H_P)<5\
+                        && calculateEta(Dst1_PZ, Dst1_P)>2 && calculateEta(Dst1_PZ, Dst1_P)<5\
+                        && calculateEta(Dst2_PZ, Dst2_P)>2 && calculateEta(Dst2_PZ, Dst2_P)<5"
+
+  "Charged tracks ipchi2": "Dst1D0K_IPCHI2_OWNPV<100000 && Dst1D0K_IPCHI2_OWNPV>0 \
+                            && Dst1D0H_IPCHI2_OWNPV<100000 && Dst1D0H_IPCHI2_OWNPV>0 \
+                            && Dst1H_IPCHI2_OWNPV<100000 && Dst1H_IPCHI2_OWNPV>0\
+                            && Dst2D0K_IPCHI2_OWNPV<100000 && Dst2D0K_IPCHI2_OWNPV>0 \
+                            && Dst2D0H_IPCHI2_OWNPV<100000 && Dst2D0H_IPCHI2_OWNPV>0\
+                            && Dst2H_IPCHI2_OWNPV<100000 && Dst2H_IPCHI2_OWNPV>0\
+                            && Dst1_IPCHI2_OWNPV<100000 && Dst1_IPCHI2_OWNPV>0\
+                            && Dst2_IPCHI2_OWNPV<100000 && Dst2_IPCHI2_OWNPV>0"

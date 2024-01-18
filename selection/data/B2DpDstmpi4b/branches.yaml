@@ -1,0 +1,74 @@
+B2DpDstmpi4b:
+    # branches to add
+    #define 4-vectors
+    "vec4_DdK": "TLorentzVector(
+        DdK_PX,
+        DdK_PY,
+        DdK_PZ,
+        sqrt(DdK_PX*DdK_PX+DdK_PY*DdK_PY+DdK_PZ*DdK_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_DdH": "TLorentzVector(
+        DdH_PX,
+        DdH_PY,
+        DdH_PZ,
+        sqrt(DdH_PX*DdH_PX+DdH_PY*DdH_PY+DdH_PZ*DdH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_Ddh": "TLorentzVector(
+        Ddh_PX,
+        Ddh_PY,
+        Ddh_PZ,
+        sqrt(Ddh_PX*Ddh_PX+Ddh_PY*Ddh_PY+Ddh_PZ*Ddh_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_DstH": "TLorentzVector(
+        DstH_PX,
+        DstH_PY,
+        DstH_PZ,
+        sqrt(DstH_PX*DstH_PX+DstH_PY*DstH_PY+DstH_PZ*DstH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_DstD0K": "TLorentzVector(
+        DstD0K_PX,
+        DstD0K_PY,
+        DstD0K_PZ,
+        sqrt(DstD0K_PX*DstD0K_PX+DstD0K_PY*DstD0K_PY+DstD0K_PZ*DstD0K_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_DstD0Hm": "TLorentzVector(
+        DstD0Hm_PX,
+        DstD0Hm_PY,
+        DstD0Hm_PZ,
+        sqrt(DstD0Hm_PX*DstD0Hm_PX+DstD0Hm_PY*DstD0Hm_PY+DstD0Hm_PZ*DstD0Hm_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_DstD0Hp1": "TLorentzVector(
+        DstD0Hp1_PX,
+        DstD0Hp1_PY,
+        DstD0Hp1_PZ,
+        sqrt(DstD0Hp1_PX*DstD0Hp1_PX+DstD0Hp1_PY*DstD0Hp1_PY+DstD0Hp1_PZ*DstD0Hp1_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_DstD0Hp2": "TLorentzVector(
+        DstD0Hp2_PX,
+        DstD0Hp2_PY,
+        DstD0Hp2_PZ,
+        sqrt(DstD0Hp2_PX*DstD0Hp2_PX+DstD0Hp2_PY*DstD0Hp2_PY+DstD0Hp2_PZ*DstD0Hp2_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_H": "TLorentzVector(
+        BH_PX,
+        BH_PY,
+        BH_PZ,
+        sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    #for very loose selection
+    
+    # for MVA
+    "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "Dst_ZFDsig": "(Dst_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(Dst_ENDVERTEX_ZERR*Dst_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "DstD0_ZFDsig": "(DstD0_ENDVERTEX_Z-Dst_ENDVERTEX_Z)/sqrt(DstD0_ENDVERTEX_ZERR*DstD0_ENDVERTEX_ZERR+Dst_ENDVERTEX_ZERR*Dst_ENDVERTEX_ZERR)"
+    "logDstipchi2pv": "log(Dst_IPCHI2_OWNPV)"
+    "logDstHipchi2pv": "log(DstH_IPCHI2_OWNPV)"
+    "logDstD0ipchi2pv": "log(DstD0_IPCHI2_OWNPV)"
+    "logDstD0ProdMINipchi2": "log(find4Min(DstD0K_IPCHI2_OWNPV, DstD0Hm_IPCHI2_OWNPV, DstD0Hp1_IPCHI2_OWNPV, DstD0Hp2_IPCHI2_OWNPV))"
+    "minDstD0ProdPT": "find4Min(DstD0K_PT, DstD0Hm_PT, DstD0Hp1_PT, DstD0Hp2_PT)"
+    "Dd_ZFDsig": "(Dd_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(Dd_ENDVERTEX_ZERR*Dd_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logDdipchi2pv": "log(Dd_IPCHI2_OWNPV)"
+    "logDdProdMINipchi2": "log(find3Min(DdK_IPCHI2_OWNPV, DdH_IPCHI2_OWNPV, Ddh_IPCHI2_OWNPV))"
+    "minDdProdPT": "find3Min(DdK_PT, DdH_PT, Ddh_PT)"
+    "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"
+    "logBH_PT": "log(BH_PT)"
+
+    # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
+    "DstD0K_ProbNNk_corr": "DstD0K_ProbNNk"
+    "DdK_ProbNNk_corr": "DdK_ProbNNk"
+    "BH_ProbNNpi_corr": "BH_ProbNNpi"
+    
+    # for helicity angle
+    # ...
+

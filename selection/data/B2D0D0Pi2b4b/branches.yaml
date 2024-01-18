@@ -1,0 +1,57 @@
+data_B2D0D0Pi2b4b:
+    # branches to add
+    #define 4-vectors
+    "vec4_D2bK": "TLorentzVector(
+        D2bK_PX,
+        D2bK_PY,
+        D2bK_PZ,
+        sqrt(D2bK_PX*D2bK_PX+D2bK_PY*D2bK_PY+D2bK_PZ*D2bK_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_D2bH": "TLorentzVector(
+        D2bH_PX,
+        D2bH_PY,
+        D2bH_PZ,
+        sqrt(D2bH_PX*D2bH_PX+D2bH_PY*D2bH_PY+D2bH_PZ*D2bH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bK": "TLorentzVector(
+        D4bK_PX,
+        D4bK_PY,
+        D4bK_PZ,
+        sqrt(D4bK_PX*D4bK_PX+D4bK_PY*D4bK_PY+D4bK_PZ*D4bK_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_D4bHp": "TLorentzVector(
+        D4bHp_PX,
+        D4bHp_PY,
+        D4bHp_PZ,
+        sqrt(D4bHp_PX*D4bHp_PX+D4bHp_PY*D4bHp_PY+D4bHp_PZ*D4bHp_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bHm1": "TLorentzVector(
+        D4bHm1_PX,
+        D4bHm1_PY,
+        D4bHm1_PZ,
+        sqrt(D4bHm1_PX*D4bHm1_PX+D4bHm1_PY*D4bHm1_PY+D4bHm1_PZ*D4bHm1_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bHm2": "TLorentzVector(
+        D4bHm2_PX,
+        D4bHm2_PY,
+        D4bHm2_PZ,
+        sqrt(D4bHm2_PX*D4bHm2_PX+D4bHm2_PY*D4bHm2_PY+D4bHm2_PZ*D4bHm2_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_H": "TLorentzVector(
+        BH_PX,
+        BH_PY,
+        BH_PZ,
+        sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    #for very loose selection
+    
+    # for MVA
+    "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "D2b_ZFDsig": "(D2b_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D2b_ENDVERTEX_ZERR*D2b_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logD2bipchi2pv": "log(D2b_IPCHI2_OWNPV)"
+    #"logD2bProdMINipchi2": "log(D2bK_IPCHI2_OWNPV*(D2bK_IPCHI2_OWNPV<D2bH_IPCHI2_OWNPV)+D2bH_IPCHI2_OWNPV*(D2bH_IPCHI2_OWNPV<D2bK_IPCHI2_OWNPV))"
+    "logD2bProdMINipchi2": "log(find2Min(D2bK_IPCHI2_OWNPV, D2bH_IPCHI2_OWNPV))"
+    #"minD2bProdPT": "D2bK_PT*(D2bK_PT<D2bH_PT)+D2bH_PT*(D2bH_PT<D2bK_PT)"
+    "minD2bProdPT": "find2Min(D2bK_PT, D2bH_PT)"
+    "D4b_ZFDsig": "(D4b_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D4b_ENDVERTEX_ZERR*D4b_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logD4bipchi2pv": "log(D4b_IPCHI2_OWNPV)"
+    "logD4bProdMINipchi2": "log(find4Min(D4bK_IPCHI2_OWNPV, D4bHp_IPCHI2_OWNPV, D4bHm1_IPCHI2_OWNPV, D4bHm2_IPCHI2_OWNPV))"
+    "minD4bProdPT": "find4Min(D4bK_PT, D4bHp_PT, D4bHm1_PT, D4bHm2_PT)"
+    "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
+    
+    # for helicity angle
+    # ...
+

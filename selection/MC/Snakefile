@@ -1,0 +1,41 @@
+import os
+from os.path import isfile, join
+import yaml
+
+#workpath=os.path.dirname(workflow.snakefile)
+
+
+
+rule apply_preselection_MC:
+    '''
+    preselect MC.
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "MC/{mode}-sqDalitz/cuts.yaml",
+        branches = "MC/{mode}-sqDalitz/branches.yaml",
+        files = "/data5/lhcb/zhoutw/B2DDbarpi/MC_download/{mode}-sqDalitz/{mode}-sqDalitz_{year}_{mag}_pidcorr.root",
+    output:
+        files = output_path("preselection/MC/{mode}/{mode}_{year}_{mag}.root"),
+        logs = output_path("preselection/MC/{mode}/logs/{mode}_{year}_{mag}.log"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --input-tree-name DecayTree \
+                                --output-file {output.files} \
+                                --mode MC_{wildcards.mode}-sqDalitz \
+                                --selection-files {input.cuts} \
+                                --branches-files {input.branches} | tee {output.logs}'
+
+rule merge_MC:
+    '''
+    merge MagUp and MagDown
+    '''
+    input:
+        expand(rules.apply_preselection_MC.output.files,
+                                                        mode='{mode}',
+                                                        year=config["years"],
+                                                        mag=config["polarities"])
+    output:
+        files = output_path("preselection/MC/{mode}/MC_Run2.root"),
+    shell:
+        'hadd {output.files} {input}'

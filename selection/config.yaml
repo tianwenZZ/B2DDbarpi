@@ -1,0 +1,24 @@
+# All available wildcards
+years:
+  - "2015"
+  - "2016"
+  - "2017"
+  - "2018"
+
+polarities:
+  - mu
+  - md
+
+mc_modes:
+  - B2DDpi
+  - B2DpDstmpi
+  - B2D0D0pi2b2b
+  - B2DstpDmpi
+
+data_modes:
+  - B2DdDdPi
+  - B2D0D0Pi2b4b
+  - B2D0D0Pi2b2b
+  - B2DstDdPi4b
+  - B2DstDdPi2b
+  - B2DstDstPi2b2b

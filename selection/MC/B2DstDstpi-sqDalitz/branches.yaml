@@ -1,0 +1,61 @@
+MC_B2DstDstpi-sqDalitz:
+    # branches to add
+    #define 4-vectors
+    "vec4_Dst1D0K": "TLorentzVector(
+        Dst1D0K_PX,
+        Dst1D0K_PY,
+        Dst1D0K_PZ,
+        sqrt(Dst1D0K_PX*Dst1D0K_PX+Dst1D0K_PY*Dst1D0K_PY+Dst1D0K_PZ*Dst1D0K_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_Dst1D0H": "TLorentzVector(
+        Dst1D0H_PX,
+        Dst1D0H_PY,
+        Dst1D0H_PZ,
+        sqrt(Dst1D0H_PX*Dst1D0H_PX+Dst1D0H_PY*Dst1D0H_PY+Dst1D0H_PZ*Dst1D0H_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_Dst1H": "TLorentzVector(
+        Dst1H_PX,
+        Dst1H_PY,
+        Dst1H_PZ,
+        sqrt(Dst1H_PX*Dst1H_PX+Dst1H_PY*Dst1H_PY+Dst1H_PZ*Dst1H_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_Dst2H": "TLorentzVector(
+        Dst2H_PX,
+        Dst2H_PY,
+        Dst2H_PZ,
+        sqrt(Dst2H_PX*Dst2H_PX+Dst2H_PY*Dst2H_PY+Dst2H_PZ*Dst2H_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_Dst2D0K": "TLorentzVector(
+        Dst2D0K_PX,
+        Dst2D0K_PY,
+        Dst2D0K_PZ,
+        sqrt(Dst2D0K_PX*Dst2D0K_PX+Dst2D0K_PY*Dst2D0K_PY+Dst2D0K_PZ*Dst2D0K_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_Dst2D0H": "TLorentzVector(
+        Dst2D0H_PX,
+        Dst2D0H_PY,
+        Dst2D0H_PZ,
+        sqrt(Dst2D0H_PX*Dst2D0H_PX+Dst2D0H_PY*Dst2D0H_PY+Dst2D0H_PZ*Dst2D0H_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_H": "TLorentzVector(
+        BH_PX,
+        BH_PY,
+        BH_PZ,
+        sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    #for very loose selection
+    
+    # for MVA
+    "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "Dst1_ZFDsig": "(Dst1_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(Dst1_ENDVERTEX_ZERR*Dst1_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "Dst1D0_ZFDsig": "(Dst1D0_ENDVERTEX_Z-Dst1_ENDVERTEX_Z)/sqrt(Dst1D0_ENDVERTEX_ZERR*Dst1D0_ENDVERTEX_ZERR+Dst1_ENDVERTEX_ZERR*Dst1_ENDVERTEX_ZERR)"
+    "logDst1ipchi2pv": "log(Dst1_IPCHI2_OWNPV)"
+    "logDst1D0ipchi2pv": "log(Dst1D0_IPCHI2_OWNPV)"
+    "logDst1Hipchi2pv": "log(Dst1H_IPCHI2_OWNPV)"
+    "logDst1D0ProdMINipchi2": "log(find2Min(Dst1D0K_IPCHI2_OWNPV, Dst1D0H_IPCHI2_OWNPV))"
+    "minDst1D0ProdPT": "find2Min(Dst1D0K_PT, Dst1D0H_PT)"
+    "Dst2_ZFDsig": "(Dst2_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(Dst2_ENDVERTEX_ZERR*Dst2_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "Dst2D0_ZFDsig": "(Dst2D0_ENDVERTEX_Z-Dst2_ENDVERTEX_Z)/sqrt(Dst2D0_ENDVERTEX_ZERR*Dst2D0_ENDVERTEX_ZERR+Dst2_ENDVERTEX_ZERR*Dst2_ENDVERTEX_ZERR)"
+    "logDst2ipchi2pv": "log(Dst2_IPCHI2_OWNPV)"
+    "logDst2Hipchi2pv": "log(Dst2H_IPCHI2_OWNPV)"
+    "logDst2D0ipchi2pv": "log(Dst2D0_IPCHI2_OWNPV)"
+    "logDst2D0ProdMINipchi2": "log(find2Min(Dst2D0K_IPCHI2_OWNPV, Dst2D0H_IPCHI2_OWNPV))"
+    "minDst2D0ProdPT": "find2Min(Dst2D0K_PT, Dst2D0H_PT)"
+    "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"
+    "logBH_PT": "log(BH_PT)"
+    # for helicity angle
+    # ...
+

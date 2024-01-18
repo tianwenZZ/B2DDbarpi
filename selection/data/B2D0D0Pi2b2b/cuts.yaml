@@ -1,0 +1,19 @@
+data_B2D0D0Pi2b2b:
+
+  # trigger
+  "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
+  "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
+  "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
+
+
+  # preselection:
+  "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"
+  "D candidates": "D1_IPCHI2_OWNPV<100000 && D2_IPCHI2_OWNPV<100000 && D1_M>1845 && D1_M<1885 && D2_M>1845 && D2_M<1885"
+  "Bachelor": "BH_IPCHI2_OWNPV<100000"
+  "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
+                        && calculateEta(D1K_PZ, D1K_P)>2 && calculateEta(D1K_PZ, D1K_P)<5 \
+                        && calculateEta(D1H_PZ, D1H_P)>2 && calculateEta(D1H_PZ, D1H_P)<5 \
+                        && calculateEta(D2K_PZ, D2K_P)>2 && calculateEta(D2K_PZ, D2K_P)<5 \
+                        && calculateEta(D2H_PZ, D2H_P)>2 && calculateEta(D2H_PZ, D2H_P)<5"
+  "Charged tracks ipchi2": "D1K_IPCHI2_OWNPV<100000 && D1H_IPCHI2_OWNPV<100000\
+                            && D2K_IPCHI2_OWNPV<100000 && D2H_IPCHI2_OWNPV<100000"

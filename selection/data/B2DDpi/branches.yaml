@@ -1,0 +1,65 @@
+B2DDpi:
+    # branches to add
+    #define 4-vectors
+    "vec4_D1K": "TLorentzVector(
+        D1K_PX,
+        D1K_PY,
+        D1K_PZ,
+        sqrt(D1K_PX*D1K_PX+D1K_PY*D1K_PY+D1K_PZ*D1K_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_D1H": "TLorentzVector(
+        D1H_PX,
+        D1H_PY,
+        D1H_PZ,
+        sqrt(D1H_PX*D1H_PX+D1H_PY*D1H_PY+D1H_PZ*D1H_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D1h": "TLorentzVector(
+        D1h_PX,
+        D1h_PY,
+        D1h_PZ,
+        sqrt(D1h_PX*D1h_PX+D1h_PY*D1h_PY+D1h_PZ*D1h_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D2K": "TLorentzVector(
+        D2K_PX,
+        D2K_PY,
+        D2K_PZ,
+        sqrt(D2K_PX*D2K_PX+D2K_PY*D2K_PY+D2K_PZ*D2K_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_D2H": "TLorentzVector(
+        D2H_PX,
+        D2H_PY,
+        D2H_PZ,
+        sqrt(D2H_PX*D2H_PX+D2H_PY*D2H_PY+D2H_PZ*D2H_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D2h": "TLorentzVector(
+        D2h_PX,
+        D2h_PY,
+        D2h_PZ,
+        sqrt(D2h_PX*D2h_PX+D2h_PY*D2h_PY+D2h_PZ*D2h_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_H": "TLorentzVector(
+        BH_PX,
+        BH_PY,
+        BH_PZ,
+        sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    #for very loose selection
+    
+    # for MVA
+    "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "D1_ZFDsig": "(D1_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D1_ENDVERTEX_ZERR*D1_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logD1ipchi2pv": "log(D1_IPCHI2_OWNPV)"
+    "logD1ProdMINipchi2": "log(find3Min(D1K_IPCHI2_OWNPV, D1H_IPCHI2_OWNPV, D1h_IPCHI2_OWNPV))"
+    "minD1ProdPT": "find3Min(D1K_PT, D1H_PT, D1h_PT)"
+    "D2_ZFDsig": "(D2_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D2_ENDVERTEX_ZERR*D2_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logD2ipchi2pv": "log(D2_IPCHI2_OWNPV)"
+    "logD2ProdMINipchi2": "log(find3Min(D2K_IPCHI2_OWNPV, D2H_IPCHI2_OWNPV, D2h_IPCHI2_OWNPV))"
+    "minD2ProdPT": "find3Min(D2K_PT, D2H_PT, D2h_PT)"
+    "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
+    "logBH_PT": "log(BH_PT)"
+
+    # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
+    "D1K_ProbNNk_corr": "D1K_ProbNNk"
+    "D2K_ProbNNk_corr": "D2K_ProbNNk"
+    "D1H_ProbNNpi_corr": "D1H_ProbNNpi"
+    "D1h_ProbNNpi_corr": "D1h_ProbNNpi"
+    "D2H_ProbNNpi_corr": "D2H_ProbNNpi"
+    "D2h_ProbNNpi_corr": "D2h_ProbNNpi"
+    "BH_ProbNNpi_corr": "BH_ProbNNpi"
+
+    # for helicity angle
+    # ...
+

@@ -1,0 +1,37 @@
+B2DstDstpi:
+
+  # trigger
+  "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
+  "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
+  "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
+
+
+  # preselection:
+  "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"
+  "D candidates": "Dst1_IPCHI2_OWNPV<100000 && Dst1_IPCHI2_OWNPV>0 \
+                  && Dst2_IPCHI2_OWNPV<100000 && Dst2_IPCHI2_OWNPV>0 \
+                  && Dst1D0_IPCHI2_OWNPV<100000 && Dst1D0_IPCHI2_OWNPV>0 \
+                  && Dst2D0_IPCHI2_OWNPV<100000 && Dst2D0_IPCHI2_OWNPV>0 \
+                  && Dst1D0_M>1845 && Dst1D0_M<1885 \
+                  && Dst2D0_M>1845 && Dst2D0_M<1885 \
+                  && Dst1_M>1990 && Dst1_M<2030 \
+                  && Dst2_M>1990 && Dst2_M<2030" 
+  "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
+  "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
+                        && calculateEta(Dst1D0K_PZ, Dst1D0K_P)>2 && calculateEta(Dst1D0K_PZ, Dst1D0K_P)<5 \
+                        && calculateEta(Dst1D0H_PZ, Dst1D0H_P)>2 && calculateEta(Dst1D0H_PZ, Dst1D0H_P)<5 \
+                        && calculateEta(Dst2D0K_PZ, Dst2D0K_P)>2 && calculateEta(Dst2D0K_PZ, Dst2D0K_P)<5 \
+                        && calculateEta(Dst2D0H_PZ, Dst2D0H_P)>2 && calculateEta(Dst2D0H_PZ, Dst2D0H_P)<5\
+                        && calculateEta(Dst1H_PZ, Dst1H_P)>2 && calculateEta(Dst1H_PZ, Dst1H_P)<5\
+                        && calculateEta(Dst2H_PZ, Dst2H_P)>2 && calculateEta(Dst2H_PZ, Dst2H_P)<5\
+                        && calculateEta(Dst1_PZ, Dst1_P)>2 && calculateEta(Dst1_PZ, Dst1_P)<5\
+                        && calculateEta(Dst2_PZ, Dst2_P)>2 && calculateEta(Dst2_PZ, Dst2_P)<5"
+
+  "Charged tracks ipchi2": "Dst1D0K_IPCHI2_OWNPV<100000 && Dst1D0K_IPCHI2_OWNPV>0 \
+                            && Dst1D0H_IPCHI2_OWNPV<100000 && Dst1D0H_IPCHI2_OWNPV>0 \
+                            && Dst1H_IPCHI2_OWNPV<100000 && Dst1H_IPCHI2_OWNPV>0\
+                            && Dst2D0K_IPCHI2_OWNPV<100000 && Dst2D0K_IPCHI2_OWNPV>0 \
+                            && Dst2D0H_IPCHI2_OWNPV<100000 && Dst2D0H_IPCHI2_OWNPV>0\
+                            && Dst2H_IPCHI2_OWNPV<100000 && Dst2H_IPCHI2_OWNPV>0\
+                            && Dst1_IPCHI2_OWNPV<100000 && Dst1_IPCHI2_OWNPV>0\
+                            && Dst2_IPCHI2_OWNPV<100000 && Dst2_IPCHI2_OWNPV>0"

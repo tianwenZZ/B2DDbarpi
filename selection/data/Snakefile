@@ -1,0 +1,60 @@
+import os
+from os.path import isfile, join
+import yaml
+include: 'helpers.smk'
+
+
+#workpath=os.path.dirname(workflow.snakefile)
+
+data2MC_mode_dict={"B2DdDdPi": "B2DDpi",
+                   "B2DstDdPi2b": "B2DpDstmpi",
+                   "B2D0D0Pi2b2b": "B2D0D0pi2b2b",
+                   "B2DstDstPi2b2b": "B2DstDstpi",
+                   "B2DstDdPi2b": "B2DstpDmpi",
+}
+
+MC2data_mode_dict={"B2DDpi": "B2DdDdPi",
+                   "B2DpDstmpi": "B2DstDdPi2b",
+                   "B2D0D0pi2b2b": "B2D0D0Pi2b2b",
+                   "B2DstDstpi": "B2DstDstPi2b2b",
+                   "B2DstpDmpi": "B2DstDdPi2b",
+}
+
+rule apply_preselection_data:
+    '''
+    preselect data.
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "data/{mode}/cuts.yaml",
+        branches = "data/{mode}/branches.yaml",
+        files = "/data5/lhcb/zhoutw/B2DDbarpi/data_download/data_split/data_{year}_{mag}.root",
+    params:
+        tree_name = lambda wildcards: MC2data_mode_dict[wildcards.mode]+"/DecayTree",
+    output:
+        files = output_path("preselection/data/{mode}/data_{year}_{mag}.root"),
+        logs = output_path("preselection/data/{mode}/logs/data_{year}_{mag}.log"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --input-tree-name {params.tree_name} \
+                                --output-file {output.files} \
+                                --mode {wildcards.mode} \
+                                --selection-files {input.cuts} \
+                                --branches-files {input.branches} | tee {output.logs}'
+    
+
+rule merge_data:
+    '''
+    merge MagUp and MagDown
+    '''
+    input:
+        expand(rules.apply_preselection_data.output.files,
+                                                        mode='{mode}',
+                                                        year=config["years"],
+                                                        mag=config["polarities"])
+    output:
+        files = output_path("preselection/data/{mode}/data_Run2.root"),
+    shell:
+        'hadd {output.files} {input}'
+
+

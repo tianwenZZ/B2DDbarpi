@@ -1,0 +1,35 @@
+B2D0D0pi2b2b:
+    B_DiraAngle:
+      type: F
+    B_ENDVERTEX_CHI2:
+      type: F
+    B_IPCHI2_OWNPV:
+      type: F
+    logB_fdchi2:
+      type: F
+    D1_ZFDsig:
+      type: F
+    logD1ipchi2pv:
+      type: F
+    logD1ProdMINipchi2:
+      type: F
+    minD1ProdPT:
+      type: F
+    D1K_ProbNNk_corr:
+      type: F
+    D2_ZFDsig: 
+      type: F
+    logD2ipchi2pv:
+      type: F
+    logD2ProdMINipchi2:
+      type: F
+    minD2ProdPT: 
+      type: F
+    D2K_ProbNNk_corr: 
+      type: F
+    logBH_ipchi2pv:
+      type: F
+    logBH_PT:
+      type: F
+    BH_ProbNNpi_corr:
+      type: F
