@@ -8,7 +8,7 @@ B2D0D0pi2b4b:
 
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"
-  "D candidates": "D2b_IPCHI2_OWNPV<100000 && D4b_IPCHI2_OWNPV<100000 && D2b_M>1845 && D2b_M<1885 && D4b_M>1845 && D4b_M<1885"
+  "D candidates": "D2b_IPCHI2_OWNPV<100000 && D2b_IPCHI2_OWNPV>0 && D4b_IPCHI2_OWNPV<100000 && D4b_IPCHI2_OWNPV>0 && D2b_M>1845 && D2b_M<1885 && D4b_M>1845 && D4b_M<1885"
   "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
   #"PIDkaon": "D2bK_ProbNNk>0.05 && D2bK_ProbNNk<1 && D4bK_ProbNNk>0.05 && D4bK_ProbNNk<1" 没必要写，在davinci脚本里已加过
   #"PIDpion": "D2bH_ProbNNpi>0.05 && D4bHp_ProbNNpi>0.05 && D4bHm1_ProbNNpi>0.05 && D4bHm2_ProbNNpi>0.05 && BH_ProbNNpi>0.05"

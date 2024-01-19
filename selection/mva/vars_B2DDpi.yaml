@@ -19,5 +19,5 @@ B2DDpi:
     D2H_pidcombined: "D2H_pidcombined := D2H_ProbNNpi_corr *(1- D2H_ProbNNk_corr )"
     D2h_pidcombined: "D2h_pidcombined := D2h_ProbNNpi_corr *(1- D2h_ProbNNk_corr )"
     logBH_ipchi2pv: "logBH_ipchi2pv"
-    logBH_PT: "logBH_PT"
+    BH_PT: "BH_PT"
     BH_pidcombined: "BH_pidcombined := BH_ProbNNpi_corr *(1- BH_ProbNNk_corr )"

@@ -20,5 +20,5 @@ B2DstDstpi:
     minDst2D0ProdPT: "minDst2D0ProdPT"
     Dst2D0K_ProbNNk_corr: "Dst2D0K_ProbNNk_corr"
     logBH_ipchi2pv: "logBH_ipchi2pv"
-    logBH_PT: "logBH_PT"
+    BH_PT: "BH_PT"
     BH_ProbNNpi_corr: "BH_ProbNNpi_corr"

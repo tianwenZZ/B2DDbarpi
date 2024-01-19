@@ -43,7 +43,6 @@ MC_B2D0D0pi2b2b-sqDalitz:
     #"minD2ProdPT": "D2K_PT*(D2K_PT<D2H_PT)+D2H_PT*(D2H_PT<D2K_PT)"
     "minD2ProdPT": "find2Min(D2K_PT, D2H_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"
-    "logBH_PT": "log(BH_PT)"
 
     # for helicity angle
     # ...

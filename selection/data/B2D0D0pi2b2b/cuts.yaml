@@ -8,7 +8,7 @@ B2D0D0pi2b2b:
 
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"
-  "D candidates": "D1_IPCHI2_OWNPV<100000 && D2_IPCHI2_OWNPV<100000 && D1_M>1845 && D1_M<1885 && D2_M>1845 && D2_M<1885"
+  "D candidates": "D1_IPCHI2_OWNPV<100000 && D1_IPCHI2_OWNPV>0 && D2_IPCHI2_OWNPV<100000 && D2_IPCHI2_OWNPV>0 && D1_M>1845 && D1_M<1885 && D2_M>1845 && D2_M<1885"
   "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
   "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
                         && calculateEta(D1K_PZ, D1K_P)>2 && calculateEta(D1K_PZ, D1K_P)<5 \

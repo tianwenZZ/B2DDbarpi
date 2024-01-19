@@ -51,7 +51,7 @@ B2D0D0pi2b4b:
     "logD4bProdMINipchi2": "log(find4Min(D4bK_IPCHI2_OWNPV, D4bHp_IPCHI2_OWNPV, D4bHm1_IPCHI2_OWNPV, D4bHm2_IPCHI2_OWNPV))"
     "minD4bProdPT": "find4Min(D4bK_PT, D4bHp_PT, D4bHm1_PT, D4bHm2_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
-    
+
     # for helicity angle
     # ...
 

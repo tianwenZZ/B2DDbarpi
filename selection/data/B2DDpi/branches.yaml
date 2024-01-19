@@ -49,7 +49,6 @@ B2DDpi:
     "logD2ProdMINipchi2": "log(find3Min(D2K_IPCHI2_OWNPV, D2H_IPCHI2_OWNPV, D2h_IPCHI2_OWNPV))"
     "minD2ProdPT": "find3Min(D2K_PT, D2H_PT, D2h_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
-    "logBH_PT": "log(BH_PT)"
 
     # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
     "D1K_ProbNNk_corr": "D1K_ProbNNk"
