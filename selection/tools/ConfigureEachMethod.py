@@ -99,7 +99,7 @@ def ConfigureEachMethod(factory, dataloader, Use):
 
     if Use["FDA_GAMT"]:
         factory.BookMethod(dataloader, TMVA.Types.kFDA, "FDA_GAMT",
-                "H:!V:Formula=(0)+(1)*x0+(2)*x1+(3)*x2+(4)*x3:ParRanges=(-1,1);(-10,10);(-10,10);(-10,10);(-10
+                "H:!V:Formula=(0)+(1)*x0+(2)*x1+(3)*x2+(4)*x3:ParRanges=(-1,1);(-10,10);(-10,10);(-10,10);(-10,10):FitMethod=GA:Converger=MINUIT:ErrorLevel=1:PrintLevel=-1:FitStrategy=0:!UseImprove:!UseMinos:SetBatch:Cycles=1:PopSize=5:Steps=5:Trim")
 
     # FDA_MCMT
     if Use["FDA_MCMT"]:

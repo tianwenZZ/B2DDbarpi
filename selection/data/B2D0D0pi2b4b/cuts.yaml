@@ -1,4 +1,4 @@
-data_B2D0D0Pi2b4b:
+B2D0D0pi2b4b:
 
   # trigger
   "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
@@ -9,7 +9,7 @@ data_B2D0D0Pi2b4b:
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"
   "D candidates": "D2b_IPCHI2_OWNPV<100000 && D4b_IPCHI2_OWNPV<100000 && D2b_M>1845 && D2b_M<1885 && D4b_M>1845 && D4b_M<1885"
-  "Bachelor": "BH_IPCHI2_OWNPV<100000"
+  "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
   #"PIDkaon": "D2bK_ProbNNk>0.05 && D2bK_ProbNNk<1 && D4bK_ProbNNk>0.05 && D4bK_ProbNNk<1" 没必要写，在davinci脚本里已加过
   #"PIDpion": "D2bH_ProbNNpi>0.05 && D4bHp_ProbNNpi>0.05 && D4bHm1_ProbNNpi>0.05 && D4bHm2_ProbNNpi>0.05 && BH_ProbNNpi>0.05"
   "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
@@ -20,5 +20,9 @@ data_B2D0D0Pi2b4b:
                         && calculateEta(D4bHm1_PZ, D4bHm1_P)>2 && calculateEta(D4bHm1_PZ, D4bHm1_P)<5\
                         && calculateEta(D4bHm2_PZ, D4bHm2_P)>2 && calculateEta(D4bHm2_PZ, D4bHm2_P)<5"
 
-  "Charged tracks ipchi2": "D2bK_IPCHI2_OWNPV<100000 && D2bH_IPCHI2_OWNPV<100000\
-                            && D4bK_IPCHI2_OWNPV<100000 && D4bHp_IPCHI2_OWNPV<100000 && D4bHm1_IPCHI2_OWNPV<100000 && D4bHm2_IPCHI2_OWNPV<100000"
+  "Charged tracks ipchi2": "D2bK_IPCHI2_OWNPV<100000 && D2bK_IPCHI2_OWNPV>0 \
+                            && D2bH_IPCHI2_OWNPV<100000 && D2bH_IPCHI2_OWNPV>0 \
+                            && D4bK_IPCHI2_OWNPV<100000 && D4bK_IPCHI2_OWNPV>0 \
+                            && D4bHp_IPCHI2_OWNPV<100000 && D4bHp_IPCHI2_OWNPV>0 \
+                            && D4bHm1_IPCHI2_OWNPV<100000 && D4bHm1_IPCHI2_OWNPV>0 \
+                            && D4bHm2_IPCHI2_OWNPV<100000 && D4bHm2_IPCHI2_OWNPV>0"

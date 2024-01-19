@@ -1,4 +1,4 @@
-data_B2D0D0Pi2b2b:
+B2D0D0pi2b2b:
     # branches to add
     #define 4-vectors
     "vec4_D1K": "TLorentzVector(

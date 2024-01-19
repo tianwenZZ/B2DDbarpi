@@ -1,35 +1,21 @@
 B2D0D0pi2b2b:
-    B_DiraAngle:
-      type: F
-    B_ENDVERTEX_CHI2:
-      type: F
-    B_IPCHI2_OWNPV:
-      type: F
-    logB_fdchi2:
-      type: F
-    D1_ZFDsig:
-      type: F
-    logD1ipchi2pv:
-      type: F
-    logD1ProdMINipchi2:
-      type: F
-    minD1ProdPT:
-      type: F
-    D1K_ProbNNk_corr:
-      type: F
-    D2_ZFDsig: 
-      type: F
-    logD2ipchi2pv:
-      type: F
-    logD2ProdMINipchi2:
-      type: F
-    minD2ProdPT: 
-      type: F
-    D2K_ProbNNk_corr: 
-      type: F
-    logBH_ipchi2pv:
-      type: F
-    logBH_PT:
-      type: F
-    BH_ProbNNpi_corr:
-      type: F
+    # CAUTION!!: seperate variables with spaces in definitions
+    B_DiraAngle: "B_DiraAngle"
+    B_ENDVERTEX_CHI2: "B_ENDVERTEX_CHI2"
+    B_IPCHI2_OWNPV: "B_IPCHI2_OWNPV"
+    logB_fdchi2: "logB_fdchi2"
+    D1_ZFDsig: "D1_ZFDsig"
+    logD1ipchi2pv: "logD1ipchi2pv"
+    logD1ProdMINipchi2: "logD1ProdMINipchi2"
+    minD1ProdPT: "minD1ProdPT"
+    D1K_ProbNNk_corr: "D1K_ProbNNk_corr"
+    D1H_pidcombined: "D1H_pidcombined := D1H_ProbNNpi_corr * ( 1 - D1H_ProbNNk_corr )"
+    D2_ZFDsig: "D2_ZFDsig"
+    logD2ipchi2pv: "logD2ipchi2pv"
+    logD2ProdMINipchi2: "logD2ProdMINipchi2"
+    minD2ProdPT: "minD2ProdPT"
+    D2K_ProbNNk_corr: "D2K_ProbNNk_corr"
+    D2H_pidcombined: "D2H_pidcombined := D2H_ProbNNpi_corr * ( 1 - D2H_ProbNNk_corr )"
+    logBH_ipchi2pv: "logBH_ipchi2pv"
+    logBH_PT: "logBH_PT"
+    BH_pidcombined: "BH_pidcombined := BH_ProbNNpi_corr * ( 1- BH_ProbNNk_corr )"

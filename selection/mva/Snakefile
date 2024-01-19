@@ -1,7 +1,7 @@
 import os
 from os.path import isfile, join
 
-#workpath=os.path.dirname(workflow.snakefile)
+workpath=os.path.dirname(workflow.snakefile)
 
 rule mva_train:
     '''
@@ -14,15 +14,15 @@ rule mva_train:
         mva_vars = "mva/vars_{mode}.yaml",
     params:
         method = "mva/MethodConf.yaml",
-        dataset = "output/mva/train/{mode}/dataset",
     output:
+        dataset = directory("output/mva/train/{mode}/dataset"),
         files = output_path("mva/train/{mode}/tmva.root"),
         logs = output_path("mva/train/{mode}/logs/tmva.log"),
     shell:
         'python3 {input.script} --input-files-mc {input.files_mc} \
                                 --input-files-bkg {input.files_bkg}\
                                 --output-file {output.files} \
-                                --output-ds {params.dataset} \
+                                --output-ds {output.dataset} \
                                 --method-config {params.method} \
                                 --mode {wildcards.mode} \
                                 --mva-vars {input.mva_vars} | tee {output.logs}'
@@ -36,7 +36,7 @@ rule mva_apply_data:
         script = "tools/TMVAClassificationApplication.py",
         files = rules.merge_data.output.files,
         mva_vars = rules.mva_train.input.mva_vars,
-        dataset = rules.mva_train.params.dataset, 
+        dataset = rules.mva_train.output.dataset, 
     params:
         method = rules.mva_train.params.method,
     output:
@@ -58,7 +58,7 @@ rule mva_apply_MC:
         script = "tools/TMVAClassificationApplication.py",
         files = rules.merge_MC.output.files,
         mva_vars = rules.mva_train.input.mva_vars,
-        dataset = rules.mva_train.params.dataset, 
+        dataset = rules.mva_train.output.dataset, 
     params:
         method = rules.mva_train.params.method,
     output:
