@@ -26,7 +26,7 @@ def load_data(treename, files):
 
 def train(input_files_mc, input_tree_name_mc, input_files_bkg, input_tree_name_bkg,
                        output_file, output_ds,
-                       method_config, mode, mva_vars):
+                       method_config, mode, mva_vars, selection_files):
 
     #ROOT.EnableImplicitMT()
     # Default MVA methods to be trained + tested
@@ -37,6 +37,7 @@ def train(input_files_mc, input_tree_name_mc, input_files_bkg, input_tree_name_b
     
     # Default vars to be trained + tested
     vars = read_from_yaml(mode, mva_vars)
+    cuts = read_from_yaml(mode, selection_files)
 
     TMVA.Tools.Instance()
     print("==> Start TMVAClassification")
@@ -63,8 +64,8 @@ def train(input_files_mc, input_tree_name_mc, input_files_bkg, input_tree_name_b
     dataloader.AddSignalTree(tsig, signalWeight)
     dataloader.AddBackgroundTree(tbkg, backgroundWeight)
 
-    scut=""
-    bcut="B_M>5500 && B_M<6000"
+    scut=cuts["scut"]
+    bcut=cuts["bcut"]
 
     train_test = "nTrain_Signal={}:nTrain_Background={}:SplitMode=Random:NormMode=NumEvents:!V".format(
         int(tsig.GetEntries(scut) * 0.5),
@@ -128,7 +129,9 @@ if __name__ == '__main__':
                         help='Yaml files of training methods and their configuration')
     parser.add_argument('--mode', help='Name of the decay modes to be trained')
     parser.add_argument('--mva-vars', default='', nargs='+',
-                        help='Yaml files of training variables and their possible cuts')
+                        help='Yaml files of training variables')
+    parser.add_argument('--selection-files', default='', nargs='+',
+                        help='Yaml files of cuts for signals and bkg')
     args = parser.parse_args()
     
     train(**vars(args))

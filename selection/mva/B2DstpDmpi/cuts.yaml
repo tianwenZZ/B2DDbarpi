@@ -1,0 +1,3 @@
+B2DstpDmpi:
+    scut: "DstD0H_ProbNNpi_corr * (1- DstD0H_ProbNNk_corr )>0.2 && DstH_ProbNNpi_corr * (1- DstH_ProbNNk_corr )>0.2 && DdH_ProbNNpi_corr * ( 1 - DdH_ProbNNk_corr ) >0.2 && Ddh_ProbNNpi_corr * ( 1 - Ddh_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr * ( 1 - BH_ProbNNk_corr )>0.2"
+    bcut: "B_M>5500 && B_M<6000 && DstD0H_ProbNNpi_corr * (1- DstD0H_ProbNNk_corr )>0.2 && DstH_ProbNNpi_corr * (1- DstH_ProbNNk_corr )>0.2 && DdH_ProbNNpi_corr * ( 1 - DdH_ProbNNk_corr ) >0.2 && Ddh_ProbNNpi_corr * ( 1 - Ddh_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr * ( 1 - BH_ProbNNk_corr )>0.2"

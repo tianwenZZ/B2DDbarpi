@@ -11,7 +11,8 @@ rule mva_train:
         script = "tools/TMVAClassification.py",
         files_mc = rules.merge_MC.output.files,
         files_bkg = rules.merge_data.output.files,
-        mva_vars = "mva/vars_{mode}.yaml",
+        mva_vars = "mva/{mode}/vars.yaml",
+        cuts = "mva/{mode}/cuts.yaml"
     params:
         method = "mva/MethodConf.yaml",
     output:
@@ -25,7 +26,8 @@ rule mva_train:
                                 --output-ds {output.dataset} \
                                 --method-config {params.method} \
                                 --mode {wildcards.mode} \
-                                --mva-vars {input.mva_vars} | tee {output.logs}'
+                                --mva-vars {input.mva_vars} \
+                                --selection-files {input.cuts} | tee {output.logs}'
 
 
 rule mva_apply_data:

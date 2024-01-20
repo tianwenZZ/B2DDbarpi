@@ -13,6 +13,7 @@ B2DstpDmpi:
     minDstD0ProdPT: "minDstD0ProdPT"
     DstD0K_ProbNNk_corr: "DstD0K_ProbNNk_corr"
     DstD0H_pidcombined: "DstD0H_pidcombined := DstD0H_ProbNNpi_corr * (1- DstD0H_ProbNNk_corr )"
+    DstH_pidcombined: "DstH_pidcombined := DstH_ProbNNpi_corr * (1- DstH_ProbNNk_corr )"
     Dd_ZFDsig: "Dd_ZFDsig"
     logDdipchi2pv: "logDdipchi2pv"
     logDdProdMINipchi2: "logDdProdMINipchi2"

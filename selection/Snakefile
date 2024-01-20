@@ -48,4 +48,4 @@ rule all:
     input:
         #expand(rules.merge_data.output.files, mode=config["mc_modes"]),
         #expand(rules.merge_MC.output.files, mode=config["mc_modes"]),
-        expand(rules.draw_fom_curve.output.files, mode="B2DDpi"),
+        expand(rules.draw_fom_curve.output.files, mode=config["mc_modes"]),
