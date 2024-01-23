@@ -1,0 +1,33 @@
+import os
+
+workpath=os.path.dirname(workflow.snakefile)
+
+rule generate_misID_toy:
+    input:
+        script = workpath+"/run.sh",
+    params:
+        ntoys = 100000,
+        workpath=os.path.dirname(workflow.snakefile),
+    output:
+        files_tree = output_path("misID/{misid_mode}/{misid_mode}_tree.root"),
+        files_hists = output_path("misID/{misid_mode}/{misid_mode}_hists.root"),
+        logs = output_path("misID/{misid_mode}/{misid_mode}.log"),
+    shell:
+        "bash -c 'cd {params.workpath} && ({input.script} {wildcards.misid_mode} {params.ntoys} | tee {output.logs}) \
+        && mv {wildcards.misid_mode}_tree.root {output.files_tree} \
+        && mv {wildcards.misid_mode}_hists.root {output.files_hists}' "
+
+rule plot_misID_shape:
+    input:
+        script = "tools/plot_misID.py",
+        files = rules.generate_misID_toy.output.files_tree,
+        configs = "misID/config_plot_{misid_mode}.yaml",
+    output:
+        files = output_path("misID/{misid_mode}/plot/mB.pdf"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --output-file {output.files} \
+                                --config-file {input.configs} \
+                                --mode {wildcards.misid_mode}'
+
+

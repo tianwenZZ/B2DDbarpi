@@ -22,3 +22,7 @@ data_modes:
   - B2DstDdPi4b
   - B2DstDdPi2b
   - B2DstDstPi2b2b
+
+misID_modes:
+  - B2DDK
+  - B2D0D0bK
