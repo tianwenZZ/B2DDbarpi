@@ -22,7 +22,7 @@ def apply(input_files, input_tree_name, input_ds,
           output_file, output_tree_name,
           method_config, mode, mva_vars):
     # Default MVA methods to be trained + tested
-    ROOT.EnableImplicitMT(20)
+    ROOT.EnableImplicitMT()
     Use = read_from_yaml("MVAmethods", method_config)
     for key in Use.keys():
         if Use[key]:
@@ -56,13 +56,16 @@ def apply(input_files, input_tree_name, input_ds,
         responses[methodName] = array('d', [0.])
         output_tree.Branch(methodName, responses[methodName], methodName+"/D")
 
-    for ievt in range(input_tree.GetEntries()):
+    nentries = input_tree.GetEntries()
+    print("Total event number to be applied: ", nentries)
+    for ievt in range(nentries):
         input_tree.GetEntry(ievt)
         for v in vars.keys():
             f_arrays[v][0] = get_val(input_tree, vars[v])
         for methodName in methods:
             responses[methodName][0] = reader.EvaluateMVA(methodName)
         output_tree.Fill()
+        if ievt%1000==0: print(f"{ievt} events are finished.")
 
     print("==> TMVAClassificationApplication is done!")
     output_tree.AutoSave()

@@ -26,10 +26,6 @@ wildcard_constraints:
 
 workpath = os.path.dirname(workflow.snakefile)
 
-# data_modes=["B2DdDdPi","B2D0D0Pi2b2b","B2D0D0Pi2b4b"]
-data_modes = ["B2DstDdPi2b"]
-years = ["2015"]
-mc_modes = ["B2DDpi-sqDalitz"]
 
 """
 rule all:
@@ -42,10 +38,12 @@ rule all:
 include: "MC/Snakefile"
 include: "data/Snakefile"
 include: "mva/Snakefile"
+include: "misID/Snakefile"
 
 
 rule all:
     input:
         #expand(rules.merge_data.output.files, mode=config["mc_modes"]),
         #expand(rules.merge_MC.output.files, mode=config["mc_modes"]),
-        expand(rules.draw_fom_curve.output.files, mode=config["mc_modes"]),
+        #expand(rules.draw_fom_curve.output.files, mode=config["mc_modes"]),
+        expand(rules.plot_misID_shape.output.files, misid_mode=config["misID_modes"])

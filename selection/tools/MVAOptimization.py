@@ -78,6 +78,7 @@ def Fit(input_files, input_tree,
             arr_mass < xup) & (arr[m] > method_config[m])]
         data = RooDataSet.from_numpy({"mB": arr_mass}, mB)
         nentries = data.numEntries()
+        print(f"{nentries} events to be fit...")
 
         mean = RooRealVar("mean", "mean of Gaussian", 5279, 5270, 5300)
         sigma = RooRealVar("sigma", "sigma of Gaussian", 6., 0.1, 15)
@@ -141,19 +142,24 @@ def optimize(input_files_mc, input_tree_name_mc, input_files_data, input_tree_na
 
     ofile = TFile(output_file, "recreate")
 
+    print("### Fit at very loose cut ...")
     fitresults = Fit(input_files_data, input_tree_name_data,
                      methods, fit_params_path, 5259, 5299)
 
+    print("### Generating signal cut efficiency ...")
     sig_eff = EffMap(input_files_mc, input_tree_name_mc,
                      methods, mmin=5259, mmax=5299)
+    print("### Generating bkg cut retentention rate ...")
     bkg_retention = EffMap(input_files_data, input_tree_name_data,
                            methods, mmin=5500, mmax=99999)
 
+    print("### Calculating FoM ...")
     gr_fom = {}
     for m in methods.keys():
         x, y, xerr, yerr = [], [], [], []
         ((S0, S0err), (B0, B0err)) = fitresults[m]
         n = min(sig_eff[m].GetN(), bkg_retention[m].GetN())
+        print(f"### Total {n} points to be looped ...")
         for idata in range(0, n):
             eff, efferr = sig_eff[m].GetPointY(
                 idata), sig_eff[m].GetErrorY(idata)
