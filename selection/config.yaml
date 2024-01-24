@@ -26,3 +26,7 @@ data_modes:
 misID_modes:
   - B2DDK
   - B2D0D0bK
+
+massfit_modes:
+  - B2DDpi
+  - B2D0D0pi2b2b

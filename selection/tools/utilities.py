@@ -1,5 +1,6 @@
 import yaml
 
+import ROOT
 from ROOT import TChain
 
 def get_val(tree,item):
@@ -30,6 +31,9 @@ def read_from_yaml(mode, selection_files):
 
 
 def load_data(treename, files):
+    '''
+    load data files to a TChain
+    '''
     names = []
     for n in files:
         names.append(n if n.endswith('.root') else n+'*.root')
@@ -37,3 +41,25 @@ def load_data(treename, files):
     for n in names:
         tree.Add(n)
     return tree
+
+
+def draw_pull(plot, xx, xtitle):
+    hpull = plot.pullHist()
+    hpull.SetFillColor(1)
+
+    frame = xx.frame(ROOT.RooFit.Title("pull"))
+    frame.GetXaxis().SetTitle(xtitle)
+    frame.GetYaxis().SetTitle("pull")
+    frame.GetYaxis().SetRangeUser(-5, 5)
+    frame.GetXaxis().SetTitleSize(0.15)
+    frame.GetXaxis().SetTitleOffset(1.10)
+    frame.GetXaxis().SetLabelSize(0.15)
+    frame.GetYaxis().SetTitleSize(0.2)
+    frame.GetYaxis().SetTitleOffset(0.22)
+    frame.GetYaxis().SetNdivisions(502)
+    frame.GetYaxis().SetLabelSize(0.15)
+    frame.GetXaxis().CenterTitle()
+    frame.GetYaxis().CenterTitle()
+
+    frame.addPlotable(hpull, "BX")
+    return frame

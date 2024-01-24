@@ -1,0 +1,35 @@
+import os
+
+rule apply_cuts_prefit_MC:
+    '''
+    Apply BDT, combined pid cuts and fit range cut before mass fit of MC
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "massfit/MC/{mode}/cuts.yaml",
+        files = "output/mva/apply/MC/{mode}/MC_Run2.root",
+    output:
+        files = output_path("massfit/MC/{mode}/MC_Run2_prefit.root"),
+        logs = output_path("massfit/MC/{mode}/logs/MC_Run2_prefit.log")
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --output-file {output.files} \
+                                --mode {wildcards.mode} \
+                                --selection-files {input.cuts} | tee {output.logs}'
+
+rule massfit_MC:
+    '''
+    Mass fit of MC
+    '''
+    input:
+        script = "tools/fit_MC_for_shape.py",
+        files = rules.apply_cuts_prefit_MC.output.files,
+    output:
+        funcs = output_path("massfit/MC/{mode}/mc_shape.txt"),
+        files = output_path("massfit/MC/{mode}/fit.pdf"),
+        logs = output_path("massfit/MC/{mode}/logs/mc_shapefit.log"),
+    shell:
+        'python3 {input.script} --input-files {input.files} \
+                                --out-func {output.funcs} \
+                                --output-files {output.files} \
+                                --mode {wildcards.mode} | tee {output.logs}'
