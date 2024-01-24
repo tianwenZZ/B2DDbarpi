@@ -22,6 +22,7 @@ def plot_misID_shape(input_files, input_tree_name,
 
     config = read_from_yaml(mode, config_file)
     nbins = config["nbins"]
+    var_signal = config["var_signal"]
     var = config["var"]
     xlow = config["min"]
     xup = config["max"]
@@ -44,8 +45,8 @@ def plot_misID_shape(input_files, input_tree_name,
     h_Bpeak.SetLineColor(kBlue)
 
     can = TCanvas("can", "", 800, 600)
-    tree.Draw("(B_M-D1_M-D2_M+1.86966*2)*1000>>h_Bpeak")
-    #tree.Draw(var+">>h_mB0","","same")
+    tree.Draw(var_signal + ">>h_Bpeak")
+    # tree.Draw(var+">>h_mB0","","same")
     tree.Draw(var+">>h_mB", cut, "same")
 
     can.Print(output_file)

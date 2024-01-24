@@ -2,6 +2,7 @@ B2DDK:
     min: 5200
     max: 5310
     nbins: 100
+    var_signal: "(B_M-D1_M-D2_M+1.86966*2)*1000"
     var: "(B_M_BK2pip-D1_M_BK2pip-D2_M_BK2pip+1.86966*2)*1000"
     cut: "D1K_ProbNNk_BK2pip>0.1 && D2K_ProbNNk_BK2pip>0.1 \
                  && D1H_ProbNNpi_BK2pip>0.05 && D1h_ProbNNpi_BK2pip>0.05 \
