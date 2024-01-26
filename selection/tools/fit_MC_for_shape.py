@@ -8,16 +8,16 @@ import math
 
 from ROOT import (vector, RooRealVar, RooDataSet, RooDataHist, gSystem,
                   gROOT, TCanvas, TPad, TMath, kBlue, kRed, TLegend, TChain, TH1D,
-                  RooStats, TFile, RDataFrame, RooGaussian, TLine, RooArgList, RooAddPdf)
+                  RooStats, TFile, RDataFrame, RooGaussian, TLine, RooArgList, RooAddPdf, RooPolyVar, RooArgSet)
 import ROOT as rt
 from ROOT import RooFit as rf
 
-from utilities import load_data, read_from_yaml, draw_pull
+from utilities import draw_pull
 
 gROOT.ProcessLine(".x ~/lhcbStyle.C")
 
 
-def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files):
+def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, frac_, a1_):
     # batch mode
     gROOT.SetBatch(1)
     # rt.RooMsgService.instance().setGlobalKillBelow(rf.FATAL)
@@ -32,23 +32,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files):
               "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
 
     x = RooRealVar("mB", "mass", xlow, xup)
-    mean = RooRealVar("mean", "mean", 5279, xlow, xup)
-    sigma1 = RooRealVar("sigma1", "sigma1", 11., 0.1, 20)
-    sigma2 = RooRealVar("sigma2", "sigma2", 7., 0.1, 20)
-    '''
-    RooRealVar a0("a0","a0",0.);
-    RooRealVar a1("a1","a1",0.548);
-    //RooRealVar a1("a1","a1",0.548,0.,1.);
-    RooRealVar sigma1("sigma1","sigma1", 7., 1., 20.); // for Gaussian
-    RooPolyVar sigma2("sigma2","sigma2",sigma1,RooArgSet(a0,a1)) ;
-    '''
-    frac = RooRealVar("frac", "", 0.3, 0., 1.)
-
-    signal1 = RooGaussian("signal1", "Gaussian pdf", x, mean, sigma1)
-    signal2 = RooGaussian("signal2", "Gaussian pdf", x, mean, sigma2)
-    signal = RooAddPdf("signal", "two gaus", RooArgList(
-        signal1, signal2), RooArgList(frac))
-
+    
     # import data chain
     input_files = [input_files] if type(
         input_files) != type([]) else input_files
@@ -63,31 +47,51 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files):
     nentries = data.numEntries()
     print(f"Total event numbers {nentries}...")
 
+    mean = RooRealVar("mean", "mean", 5279, xlow, xup)
+    sigma1 = RooRealVar("sigma1", "sigma1", 11., 0.1, 20)
+    a0 = RooRealVar("a0", "a0", 0.)
+    a1 = RooRealVar("a1", "a1", 0.5, 0.01, 1.)
+    if a1_:
+        a1 = RooRealVar("a1", "a1", a1_)
+    sigma2 = RooPolyVar("sigma2", "sigma2", sigma1, RooArgSet(a0, a1))
+    '''
+    sigma2 = RooRealVar("sigma2", "sigma2", 7., 0.1, 20)
+    frac = RooRealVar("frac", "", 0.3, 0., 1.)
+    '''
+    frac = RooRealVar("frac", "", 0.3, 0.01, 1.)
+    if frac_:
+        frac = RooRealVar("frac", "", frac_)
+
+    signal1 = RooGaussian("signal1", "Gaussian pdf", x, mean, sigma1)
+    signal2 = RooGaussian("signal2", "Gaussian pdf", x, mean, sigma2)
+    signal = RooAddPdf("signal", "two gaus", [signal1, signal2], [frac])
+
+
     # read parameters in
+    # The input func file determines the final setting of params, even if a1
+    # and frac may have been fixed before.
     if in_func:
         params = signal.getParameters(x)
         params.readFromFile(in_func)
 
-    r = signal.fitTo(data, rf.Save())
+    r = signal.fitTo(data, Save = True)
     r.Print()
     params = signal.getParameters(x)
     params.writeToFile(out_func)
-    
+
     from math import sqrt
-    reso = sqrt(frac.getVal()*sigma1.getVal()**2+(1-frac.getVal())*sigma2.getVal()**2)
+    reso = sqrt(frac.getVal()*sigma1.getVal()**2 +
+                (1-frac.getVal())*sigma2.getVal()**2)
     print("The resolution of signal peak is: ", reso)
 
     # Plot the fit results
-    xframe = x.frame(rf.Title("Signal pdf fit"), rf.Bins(nbins))
+    xframe = x.frame(Title="Signal pdf fit", Bins=nbins)
     xframe.SetXTitle(xtitle[mode])
     xframe.SetYTitle("Events")
-    data.plotOn(xframe, rf.Name("data_fit"), rf.MarkerSize(0.8))
-    signal.plotOn(xframe, rf.Components("signal1"), rf.Name(
-        "Gaussian1"), rf.LineStyle(10), rf.LineColor(rt.kBlue))
-    signal.plotOn(xframe, rf.Components("signal2"), rf.Name(
-        "Gaussian2"), rf.LineStyle(10), rf.LineColor(rt.kGreen))
-    signal.plotOn(xframe, rf.Name("Total fit"),
-                  rf.LineColor(rt.kRed), rf.LineStyle(rt.kSolid))
+    data.plotOn(xframe, Name="data_fit", MarkerSize=0.8)
+    signal.plotOn(xframe, Components = {signal1}, Name = "Gaussian1", LineStyle = 10, LineColor = "kBlue")
+    signal.plotOn(xframe, Components = {signal2}, Name = "Gaussian2", LineStyle = 10, LineColor = "kGreen")
+    signal.plotOn(xframe, Name = "Total fit", LineColor = "kRed", LineStyle = "-")
     data.plotOn(xframe)
 
     def DrawAll(xframe, xx, drawleg=True):
@@ -145,6 +149,10 @@ if __name__ == '__main__':
                         help='Output func file of parameters ')
     parser.add_argument('--output-files',
                         help='Output file of fit plots')
+    parser.add_argument('--frac_', type=float,
+                        help='Fixed value of frac if fixed')
+    parser.add_argument('--a1_', type=float,
+                        help='Fixed value of a1 if fixed')
     args = parser.parse_args()
 
     fit(**vars(args))
