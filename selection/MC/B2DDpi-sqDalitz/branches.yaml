@@ -1,5 +1,6 @@
 MC_B2DDpi-sqDalitz:
     # branches to add
+    "B_PVF_M": "B_PVFitD_M[0]"
     #define 4-vectors
     "vec4_D1K": "TLorentzVector(
         D1K_PX,
@@ -36,6 +37,43 @@ MC_B2DDpi-sqDalitz:
         BH_PY,
         BH_PZ,
         sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D1K_PVFitB": "TLorentzVector(
+        B_PVFitB_Dplus0_Kplus_PX[0],
+        B_PVFitB_Dplus0_Kplus_PY[0],
+        B_PVFitB_Dplus0_Kplus_PZ[0],
+        B_PVFitB_Dplus0_Kplus_PE[0])"
+    "vec4_D1H_PVFitB": "TLorentzVector(
+        B_PVFitB_Dplus0_piplus_0_PX[0],
+        B_PVFitB_Dplus0_piplus_0_PY[0],
+        B_PVFitB_Dplus0_piplus_0_PZ[0],
+        B_PVFitB_Dplus0_piplus_0_PE[0])"
+    "vec4_D1h_PVFitB": "TLorentzVector(
+        B_PVFitB_Dplus0_piplus_PX[0],
+        B_PVFitB_Dplus0_piplus_PY[0],
+        B_PVFitB_Dplus0_piplus_PZ[0],
+        B_PVFitB_Dplus0_piplus_PE[0])"
+    "vec4_D2K_PVFitB": "TLorentzVector(
+        B_PVFitB_Dplus_Kplus_PX[0],
+        B_PVFitB_Dplus_Kplus_PY[0],
+        B_PVFitB_Dplus_Kplus_PZ[0],
+        B_PVFitB_Dplus_Kplus_PE[0])"
+    "vec4_D2H_PVFitB": "TLorentzVector(
+        B_PVFitB_Dplus_piplus_0_PX[0],
+        B_PVFitB_Dplus_piplus_0_PY[0],
+        B_PVFitB_Dplus_piplus_0_PZ[0],
+        B_PVFitB_Dplus_piplus_0_PE[0])"
+    "vec4_D2h_PVFitB": "TLorentzVector(
+        B_PVFitB_Dplus_piplus_PX[0],
+        B_PVFitB_Dplus_piplus_PY[0],
+        B_PVFitB_Dplus_piplus_PZ[0],
+        B_PVFitB_Dplus_piplus_PE[0])"
+    "vec4_D1_PVFitB": "vec4_D1K_PVFitB+vec4_D1H_PVFitB+vec4_D1h_PVFitB"
+    "vec4_D2_PVFitB": "vec4_D2K_PVFitB+vec4_D2H_PVFitB+vec4_D2h_PVFitB"
+    "vec4_BH_PVFitB": "TLorentzVector(
+        B_PVFitB_piplus_PX[0],
+        B_PVFitB_piplus_PY[0],
+        B_PVFitB_piplus_PZ[0],
+        B_PVFitB_piplus_PE[0])"
     #for very loose selection
     
     # for MVA
@@ -49,7 +87,13 @@ MC_B2DDpi-sqDalitz:
     "logD2ProdMINipchi2": "log(find3Min(D2K_IPCHI2_OWNPV, D2H_IPCHI2_OWNPV, D2h_IPCHI2_OWNPV))"
     "minD2ProdPT": "find3Min(D2K_PT, D2H_PT, D2h_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
+    "logBH_PT": "log(BH_PT)"
     
-    # for helicity angle
-    # ...
+    # for Dalitz variables and helicity angles
+    "m12": "(vec4_D1_PVFitB+vec4_D2_PVFitB).M()"
+    "m13": "(vec4_D1_PVFitB+vec4_BH_PVFitB).M()"
+    "m23": "(vec4_D2_PVFitB+vec4_BH_PVFitB).M()"
+    "cosHel12": "cosHel(vec4_D1_PVFitB, vec4_D2_PVFitB, vec4_BH_PVFitB)"
+    "cosHel13": "cosHel(vec4_BH_PVFitB, vec4_D1_PVFitB, vec4_D2_PVFitB)"
+    "cosHel23": "cosHel(vec4_BH_PVFitB, vec4_D2_PVFitB, vec4_D1_PVFitB)"
 

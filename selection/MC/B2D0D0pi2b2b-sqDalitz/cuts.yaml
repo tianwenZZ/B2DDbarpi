@@ -22,6 +22,7 @@ MC_B2D0D0pi2b2b-sqDalitz:
   "DaVinci_pid_cut_pi": "D1H_ProbNNpi_corr>0.05 && D1H_ProbNNpi_corr<1 \
                         && D2H_ProbNNpi_corr>0.05 && D2H_ProbNNpi_corr<1 \
                         && BH_ProbNNpi_corr>0.05 && BH_ProbNNpi_corr<1"
+  "combined pi pid cut": "D1H_ProbNNpi_corr * ( 1 - D1H_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr * ( 1 - D2H_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr * ( 1- BH_ProbNNk_corr )>0.2" 
 
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"
