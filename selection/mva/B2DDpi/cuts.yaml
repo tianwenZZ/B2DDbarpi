@@ -1,3 +1,5 @@
 B2DDpi:
-    scut: "D1H_ProbNNpi_corr * (1 - D1H_ProbNNk_corr)>0.2 && D1h_ProbNNpi_corr * (1 - D1h_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr *(1- D2H_ProbNNk_corr )>0.2 && D2h_ProbNNpi_corr *(1- D2h_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr *(1- BH_ProbNNk_corr )>0.2"
-    bcut: "B_M>5500 && B_M<6000 && D1H_ProbNNpi_corr * (1 - D1H_ProbNNk_corr)>0.2 && D1h_ProbNNpi_corr * (1 - D1h_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr *(1- D2H_ProbNNk_corr )>0.2 && D2h_ProbNNpi_corr *(1- D2h_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr *(1- BH_ProbNNk_corr )>0.2"
+    #scut: "D1H_ProbNNpi_corr * (1 - D1H_ProbNNk_corr)>0.2 && D1h_ProbNNpi_corr * (1 - D1h_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr *(1- D2H_ProbNNk_corr )>0.2 && D2h_ProbNNpi_corr *(1- D2h_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr *(1- BH_ProbNNk_corr )>0.2"
+    scut: ""
+    #bcut: "B_M>5500 && B_M<6000 && D1H_ProbNNpi_corr * (1 - D1H_ProbNNk_corr)>0.2 && D1h_ProbNNpi_corr * (1 - D1h_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr *(1- D2H_ProbNNk_corr )>0.2 && D2h_ProbNNpi_corr *(1- D2h_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr *(1- BH_ProbNNk_corr )>0.2"
+    bcut: "B_M>5500 && B_M<6000"
