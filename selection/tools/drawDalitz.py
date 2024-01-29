@@ -23,24 +23,24 @@ phsp = {"B2DDpi": DalitzPhaseSpace(mB, mDp, mDp, mpi),
         }
 
 axis_title_2d = {"B2DDpi":
-              {"m12": "m_{D^{+}D^{-}}^{2} [GeV^{2}]",
-               "m13": "m_{D^{+}#pi^{+}}^{2} [GeV^{2}]",
-               "m23": "m_{D^{-}#pi^{+}}^{2} [GeV^{2}]"},
-              "B2D0D0pi2b2b":
-              {"m12": "m_{D^{0}#bar{D^{0}}}^{2} [GeV^{2}]",
-               "m13": "m_{D^{0}#pi^{+}}^{2} [GeV^{2}]",
-               "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"}
-              }
+                 {"m12": "m_{D^{+}D^{-}}^{2} [GeV^{2}]",
+                  "m13": "m_{D^{+}#pi^{+}}^{2} [GeV^{2}]",
+                  "m23": "m_{D^{-}#pi^{+}}^{2} [GeV^{2}]"},
+                 "B2D0D0pi2b2b":
+                 {"m12": "m_{D^{0}#bar{D^{0}}}^{2} [GeV^{2}]",
+                     "m13": "m_{D^{0}#pi^{+}}^{2} [GeV^{2}]",
+                     "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"}
+                 }
 
 axis_title_1d = {"B2DDpi":
-              {"m12": "m_{D^{+}D^{-}} [GeV/c^{2}]",
-               "m13": "m_{D^{+}#pi^{+}} [GeV/c^{2}]",
-               "m23": "m_{D^{-}#pi^{+}} [GeV/c^{2}]"},
-              "B2D0D0pi2b2b":
-              {"m12": "m_{D^{0}#bar{D^{0}}} [GeV/c^{2}]",
-               "m13": "m_{D^{0}#pi^{+}} [GeV/c^{2}]",
-               "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]"}
-              }
+                 {"m12": "m_{D^{+}D^{-}} [GeV/c^{2}]",
+                  "m13": "m_{D^{+}#pi^{+}} [GeV/c^{2}]",
+                  "m23": "m_{D^{-}#pi^{+}} [GeV/c^{2}]"},
+                 "B2D0D0pi2b2b":
+                 {"m12": "m_{D^{0}#bar{D^{0}}} [GeV/c^{2}]",
+                     "m13": "m_{D^{0}#pi^{+}} [GeV/c^{2}]",
+                     "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]"}
+                 }
 
 gROOT.ProcessLine(".x ~/lhcbStyle.C")
 ROOT.gStyle.SetPalette(kBird)
@@ -67,13 +67,14 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
 
     # Initialize histograms
     hist = {
-            "m12": TH1F("hm12", "", nbins, sqrt(phsp[mode].lowerLimit("12"))-0.2, sqrt(phsp[mode].upperLimit("12"))+0.2),
-            "m13": TH1F("hm13", "", nbins, sqrt(phsp[mode].lowerLimit("13"))-0.2, sqrt(phsp[mode].upperLimit("13"))+0.2),
-            "m23": TH1F("hm23", "", nbins, sqrt(phsp[mode].lowerLimit("23"))-0.2, sqrt(phsp[mode].upperLimit("23"))+0.2),
-            "scatter": TH2F("hscatter", "scatter",
-                    1000, phsp[mode].lowerLimit(xv[1:])-0.5, phsp[mode].upperLimit(xv[1:])+0.5,
-                    1000, phsp[mode].lowerLimit(yv[1:])-0.5, phsp[mode].upperLimit(yv[1:])+0.5)
-            }
+        "m12": TH1F("hm12", "", nbins, sqrt(phsp[mode].lowerLimit("12"))-0.2, sqrt(phsp[mode].upperLimit("12"))+0.2),
+        "m13": TH1F("hm13", "", nbins, sqrt(phsp[mode].lowerLimit("13"))-0.2, sqrt(phsp[mode].upperLimit("13"))+0.2),
+        "m23": TH1F("hm23", "", nbins, sqrt(phsp[mode].lowerLimit("23"))-0.2, sqrt(phsp[mode].upperLimit("23"))+0.2),
+        "scatter": TH2F("hscatter", "scatter",
+                        1000, phsp[mode].lowerLimit(
+                            xv[1:])-0.5, phsp[mode].upperLimit(xv[1:])+0.5,
+                        1000, phsp[mode].lowerLimit(yv[1:])-0.5, phsp[mode].upperLimit(yv[1:])+0.5)
+    }
     hist["scatter"].SetMarkerSize(0.5)
     hist["scatter"].SetXTitle(axis_title_2d[mode][xv])
     hist["scatter"].SetYTitle(axis_title_2d[mode][yv])
@@ -83,10 +84,9 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
     # The unit of m12/m13/m23 in tree branches is MeV by default. Convert MeV to GeV.
     expr = f"{yv}*{yv}/1000000:{xv}*{xv}/1000000"
     chain.Project("hscatter", expr)   # Draw with sw will cause PROBLEMS !!!
-    for m1d in ["m12","m13","m23"]:
+    for m1d in ["m12", "m13", "m23"]:
         chain.Project("h"+m1d, m1d+"/1000", sw)
         hist[m1d].SetXTitle(axis_title_1d[mode][m1d])
-
 
     def get_bachelor(ind_x, ind_y):
         # A small function to get the bachelor particle index w.r.t the frst
@@ -138,9 +138,8 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
     fmax.SetNpx(100000)
     fmin.SetNpx(100000)
 
-
     if resonances:
-        ### TBC...
+        # TBC...
         '''
         mDs12700 = 2.714
         mDs12860 = 2.859
@@ -177,7 +176,7 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
         lt.DrawLatex(10, 15.5, "X(2900)")
         '''
 
-    can = TCanvas("can_scatter", "", 800,600)
+    can = TCanvas("can_scatter", "", 800, 600)
     # can.SetRightMargin(0.13)
     hist["scatter"].Draw()
     fmax.Draw("same")
