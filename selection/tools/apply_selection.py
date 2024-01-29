@@ -72,6 +72,7 @@ def apply_selection(input_files, input_tree_name, output_file, output_tree_name,
         gInterpreter.LoadMacro('tools/find2Min.cpp')
         gInterpreter.LoadMacro('tools/find3Min.cpp')
         gInterpreter.LoadMacro('tools/find4Min.cpp')
+        gInterpreter.LoadMacro('tools/cosHel.cpp')
 
         # add new branches
         for branch in branches_to_add.keys():

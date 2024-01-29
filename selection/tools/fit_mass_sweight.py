@@ -34,7 +34,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     xtitle = {"B2DDpi": "m(D^{+}D^{-}#pi^{+}) [MeV/c^{2}]",
               "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
 
-    x = RooRealVar("mB", "mass", xlow, xup)
+    x = RooRealVar("B_PVF_M", "mass", xlow, xup)
 
     # import data chain
     input_files = [input_files] if type(
@@ -42,11 +42,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     ch = TChain(input_tree_name)
     for n in input_files:
         ch.Add(n)
-    dataframe = RDataFrame(ch)
-    df_array = dataframe.AsNumpy()
-    Bmass = np.array([m[0] for m in df_array["B_PVFitD_M"]])
-    Bmass = Bmass[(Bmass > xlow) & (Bmass < xup)]
-    data = RooDataSet.from_numpy({"mB": Bmass}, x)
+    data = RooDataSet("data", "data", ch, x, "B_PVF_M>{0} && B_PVF_M<{1}".format(xlow, xup))
     '''
     names = vector('string')()
     for n in input_files:
@@ -155,6 +151,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     sData = RooStats.SPlot("sData", "sData", data, model, [nsig, ncombkg])
     '''
     # This doesn't work because data is not a build-in variable in Rdataframe.
+    # We cannot directly use dataframe.Filter().
     # Details in https://www.nevis.columbia.edu/~seligman/root-class/RootClass2023.pdf .
     @rt.Numba.Declare(["int"], "double")
     def get_sw(index):

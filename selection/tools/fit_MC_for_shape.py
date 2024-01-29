@@ -31,19 +31,15 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
     xtitle = {"B2DDpi": "m(D^{+}D^{-}#pi^{+}) [MeV/c^{2}]",
               "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
 
-    x = RooRealVar("mB", "mass", xlow, xup)
+    x = RooRealVar("B_PVF_M", "mass", xlow, xup)
     
     # import data chain
     input_files = [input_files] if type(
         input_files) != type([]) else input_files
-    names = vector('string')()
+    ch = TChain(input_tree_name)
     for n in input_files:
-        names.push_back(n if n.endswith('.root') else n+'*.root')
-    dataframe = RDataFrame(input_tree_name, names)
-    df_array = dataframe.AsNumpy()
-    Bmass = np.array([m[0] for m in df_array["B_PVFitD_M"]])
-    Bmass = Bmass[(Bmass > xlow) & (Bmass < xup)]
-    data = RooDataSet.from_numpy({"mB": Bmass}, x)
+        ch.Add(n)
+    data = RooDataSet("data", "data", ch, x, "B_PVF_M>{0} && B_PVF_M<{1}".format(xlow, xup))
     nentries = data.numEntries()
     print(f"Total event numbers {nentries}...")
 
