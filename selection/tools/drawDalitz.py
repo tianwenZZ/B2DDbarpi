@@ -22,7 +22,7 @@ phsp = {"B2DDpi": DalitzPhaseSpace(mB, mDp, mDp, mpi),
         "B2D0D0pi2b2b": DalitzPhaseSpace(mB, mD0, mD0, mpi)
         }
 
-axis_title = {"B2DDpi":
+axis_title_2d = {"B2DDpi":
               {"m12": "m_{D^{+}D^{-}}^{2} [GeV^{2}]",
                "m13": "m_{D^{+}#pi^{+}}^{2} [GeV^{2}]",
                "m23": "m_{D^{-}#pi^{+}}^{2} [GeV^{2}]"},
@@ -30,6 +30,16 @@ axis_title = {"B2DDpi":
               {"m12": "m_{D^{0}#bar{D^{0}}}^{2} [GeV^{2}]",
                "m13": "m_{D^{0}#pi^{+}}^{2} [GeV^{2}]",
                "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"}
+              }
+
+axis_title_1d = {"B2DDpi":
+              {"m12": "m_{D^{+}D^{-}} [GeV/c^{2}]",
+               "m13": "m_{D^{+}#pi^{+}} [GeV/c^{2}]",
+               "m23": "m_{D^{-}#pi^{+}} [GeV/c^{2}]"},
+              "B2D0D0pi2b2b":
+              {"m12": "m_{D^{0}#bar{D^{0}}} [GeV/c^{2}]",
+               "m13": "m_{D^{0}#pi^{+}} [GeV/c^{2}]",
+               "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]"}
               }
 
 gROOT.ProcessLine(".x ~/lhcbStyle.C")
@@ -52,7 +62,6 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
     tex.SetTextAlign(11)
 
     yv, xv = dalitz_vars[0], dalitz_vars[1]
-    print(yv, xv)
     assert yv == "m12" or yv == "m13" or yv == "m23", "Unexpected Dalitz variable name for y-axis!"
     assert xv == "m12" or xv == "m13" or xv == "m23", "Unexpected Dalitz variable name for x-axis!"
 
@@ -61,31 +70,22 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
             "m12": TH1F("hm12", "", nbins, sqrt(phsp[mode].lowerLimit("12"))-0.2, sqrt(phsp[mode].upperLimit("12"))+0.2),
             "m13": TH1F("hm13", "", nbins, sqrt(phsp[mode].lowerLimit("13"))-0.2, sqrt(phsp[mode].upperLimit("13"))+0.2),
             "m23": TH1F("hm23", "", nbins, sqrt(phsp[mode].lowerLimit("23"))-0.2, sqrt(phsp[mode].upperLimit("23"))+0.2),
-            #"scatter": TH2F("hscatter", "scatter",
-            #        1000, phsp[mode].lowerLimit(xv[1:])-0.5, phsp[mode].upperLimit(xv[1:])+0.5,
-            #        1000, phsp[mode].lowerLimit(yv[1:])-0.5, phsp[mode].upperLimit(yv[1:])+0.5)
-            }
-    hscatter = TH2F("hscatter", "scatter",
+            "scatter": TH2F("hscatter", "scatter",
                     1000, phsp[mode].lowerLimit(xv[1:])-0.5, phsp[mode].upperLimit(xv[1:])+0.5,
                     1000, phsp[mode].lowerLimit(yv[1:])-0.5, phsp[mode].upperLimit(yv[1:])+0.5)
-    #hist["scatter"].SetMarkerSize(0.2)
-    #hist["scatter"].SetXTitle(axis_title[mode][xv])
-    #hist["scatter"].SetYTitle(axis_title[mode][yv])
-    #hscatter.SetMarkerSize(0.2)
-    hscatter.SetXTitle(axis_title[mode][xv])
-    hscatter.SetYTitle(axis_title[mode][yv])
+            }
+    hist["scatter"].SetMarkerSize(0.5)
+    hist["scatter"].SetXTitle(axis_title_2d[mode][xv])
+    hist["scatter"].SetYTitle(axis_title_2d[mode][yv])
 
     if not sw:
         sw = ""
     # The unit of m12/m13/m23 in tree branches is MeV by default. Convert MeV to GeV.
     expr = f"{yv}*{yv}/1000000:{xv}*{xv}/1000000"
-    print(expr, sw)
-    #chain.Project("hscatter", expr, sw)
-    chain.Draw(expr+">>hscatter", "sig_sw")
+    chain.Project("hscatter", expr)   # Draw with sw will cause PROBLEMS !!!
     for m1d in ["m12","m13","m23"]:
         chain.Project("h"+m1d, m1d+"/1000", sw)
-        #hist[m1d].SetXTitle(axis_title[mode][m1d])
-        hist[m1d].SetXTitle(m1d+" [GeV/c^{2}]")
+        hist[m1d].SetXTitle(axis_title_1d[mode][m1d])
 
 
     def get_bachelor(ind_x, ind_y):
@@ -129,8 +129,6 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
             (sqrt(E2st * E2st - m2 * m2) + sqrt(E3st * E3st - m3 * m3))**2
         return mmin
 
-    print(phsp[mode].lowerLimit(xv[1:]), phsp[mode].upperLimit(xv[1:]))
-    print(phsp[mode].lowerLimit(yv[1:]), phsp[mode].upperLimit(yv[1:]))
     fmax = TF1("fmax", kine_max, phsp[mode].lowerLimit(
         xv[1:]), phsp[mode].upperLimit(xv[1:]), 0)
     fmin = TF1("fmin", kine_min, phsp[mode].lowerLimit(
@@ -181,12 +179,10 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
 
     can = TCanvas("can_scatter", "", 800,600)
     # can.SetRightMargin(0.13)
-    #hist["scatter"].Draw()
-    hscatter.Draw()
+    hist["scatter"].Draw()
     fmax.Draw("same")
     fmin.Draw("same")
-    print(output_file_path)
-    can.Print(output_file_path+"/Dalitz2D_"+yv+"_"+xv+".png")
+    can.Print(output_file_path+"/Dalitz2D_"+yv+"_"+xv+".pdf")
     for n in ["m12", "m13", "m23"]:
         can1d = TCanvas("can1d_"+n, "", 800, 600)
         hist[n].Draw()

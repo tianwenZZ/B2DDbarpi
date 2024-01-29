@@ -5,13 +5,13 @@ rule check_data_Dalitz:
     Check Dalitz structures of data with sweight (bkg substracted)
     '''
     input:
-        script = "tools/drawDalitz2.py",
+        script = "tools/drawDalitz.py",
         files = rules.fit_data_sw.output.files,
     params:
         sw = "sig_sw",
         dalitz_vars = ["m13", "m12"],
     output:
-        file_dir = directory("output/checks/data_dalitz_structure/{mode}"),
+        file_dir = directory(output_path("checks/data_dalitz_structure/{mode}")),
         logs = output_path("checks/data_dalitz_structure/{mode}/logs/draw.log"),
     shell:
         'python3 {input.script} --input-files {input.files} \
