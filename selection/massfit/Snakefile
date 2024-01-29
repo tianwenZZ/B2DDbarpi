@@ -7,7 +7,7 @@ rule apply_cuts_prefit_MC:
     input:
         script = "tools/apply_selection.py",
         cuts = "massfit/MC/{mode}/cuts.yaml",
-        files = "output/mva/apply/MC/{mode}/MC_Run2.root",
+        files = rules.mva_apply_MC.output.files,
     output:
         files = output_path("massfit/MC/{mode}/prefit/MC_Run2_prefit.root"),
         logs = output_path("massfit/MC/{mode}/prefit/logs/MC_Run2_prefit.log")
@@ -63,7 +63,7 @@ rule apply_cuts_prefit_data:
     input:
         script = "tools/apply_selection.py",
         cuts = "massfit/data/{mode}/cuts.yaml",
-        files = "output/mva/apply/data/{mode}/data_Run2.root",
+        files = rules.mva_apply_data.output.files,
     output:
         files = output_path("massfit/data/{mode}/prefit/data_Run2_prefit.root"),
         logs = output_path("massfit/data/{mode}/prefit/logs/data_Run2_prefit.log")
@@ -93,3 +93,5 @@ rule fit_data_sw:
                                 --out-func {output.funcs} \
                                 --cfit-figs {output.cfit_figs} \
                                 --output-files {output.files} | tee {output.logs}'
+
+
