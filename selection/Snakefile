@@ -40,12 +40,13 @@ include: "data/Snakefile"
 include: "mva/Snakefile"
 include: "misID/Snakefile"
 include: "massfit/Snakefile"
+include: "checks/Snakefile"
 
 
 rule all:
     input:
-        #expand(rules.merge_data.output.files, mode=config["mc_modes"]),
-        #expand(rules.merge_MC.output.files, mode=config["mc_modes"]),
-        #expand(rules.draw_fom_curve.output.files, mode=config["mc_modes"]),
-        #expand(rules.plot_misID_shape.output.files, misid_mode=config["misID_modes"]),
-        expand(rules.fit_data_sw.output.cfit_figs, mode=config["massfit_modes"]),
+        #expand(rules.merge_data.output.files, mode=config["massfit_modes"]),
+        #expand(rules.merge_MC.output.files, mode=config["massfit_modes"]),
+        expand(rules.draw_fom_curve.output.files, mode=config["massfit_modes"]),
+        expand(rules.plot_misID_shape.output.files, misid_mode=config["misID_modes"]),
+        expand(rules.fit_data_sw.output.files, mode=config["massfit_modes"]),
