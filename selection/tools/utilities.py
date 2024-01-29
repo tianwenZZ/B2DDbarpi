@@ -63,3 +63,37 @@ def draw_pull(plot, xx, xtitle):
 
     frame.addPlotable(hpull, "BX")
     return frame
+
+
+class DalitzPhaseSpace:
+    def __init__(self, m0, m1, m2, m3):
+        self.m0 = m0
+        self.m1 = m1
+        self.m2 = m2
+        self.m3 = m3
+    def M0(self):
+        return self.m0
+    def M1(self):
+        return self.m1
+    def M2(self):
+        return self.m2
+    def M3(self):
+        return self.m3
+    def upperLimit(self, index):
+        if index=="12":
+            return (self.m0-self.m3)**2
+        elif index=="13":
+            return (self.m0-self.m2)**2
+        elif index=="23":
+            return (self.m0-self.m1)**2
+        else:
+            print("Error: Invalid input phsp index!")
+    def lowerLimit(self, index):
+        if index=="12":
+            return (self.m1+self.m2)**2
+        elif index=="13":
+            return (self.m1+self.m3)**2
+        elif index=="23":
+            return (self.m2+self.m3)**2
+        else:
+            print("Error: Invalid input phsp index!")
