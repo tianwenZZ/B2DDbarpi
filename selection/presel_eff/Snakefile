@@ -1,0 +1,28 @@
+import os
+from os.path import isfile, join
+import yaml
+
+#workpath=os.path.dirname(workflow.snakefile)
+
+
+
+rule presel_eff_MC:
+    '''
+    preselect MC.
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "MC/{mode}-sqDalitz/cuts.yaml",
+        branches = "MC/{mode}-sqDalitz/branches.yaml",
+        files = "/data5/lhcb/zhoutw/B2DDbarpi/MC_download/{mode}-sqDalitz/MC_Run2_pidcorr.root",
+    output:
+        files = output_path("presel_eff/MC/{mode}/MC_Run2.root"),
+        logs = output_path("presel_eff/MC/{mode}/logs/MC_Run2.log"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --input-tree-name DecayTree \
+                                --output-file {output.files} \
+                                --mode MC_{wildcards.mode}-sqDalitz \
+                                --selection-files {input.cuts} \
+                                --branches-files {input.branches} | tee {output.logs}'
+
