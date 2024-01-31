@@ -22,5 +22,5 @@ B2DstpDmpi:
     DdH_pidcombined: "DdH_pidcombined := DdH_ProbNNpi_corr * ( 1 - DdH_ProbNNk_corr )"
     Ddh_pidcombined: "Ddh_pidcombined := Ddh_ProbNNpi_corr * ( 1 - Ddh_ProbNNk_corr )"
     logBH_ipchi2pv: "logBH_ipchi2pv"
-    BH_PT: "BH_PT"
+    logBH_PT: "logBH_PT"
     BH_pidcombined: "BH_pidcombined := BH_ProbNNpi_corr * ( 1 - BH_ProbNNk_corr )"

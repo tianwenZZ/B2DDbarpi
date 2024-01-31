@@ -1,5 +1,6 @@
 MC_B2DstDstpi-sqDalitz:
     # branches to add
+    "B_PVF_M": "B_PVFitD_M[0]"
     #define 4-vectors
     "vec4_Dst1D0K": "TLorentzVector(
         Dst1D0K_PX,
@@ -55,6 +56,7 @@ MC_B2DstDstpi-sqDalitz:
     "logDst2D0ProdMINipchi2": "log(find2Min(Dst2D0K_IPCHI2_OWNPV, Dst2D0H_IPCHI2_OWNPV))"
     "minDst2D0ProdPT": "find2Min(Dst2D0K_PT, Dst2D0H_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"
+    "logBH_PT": "log(BH_PT)"
     # for helicity angle
     # ...
 

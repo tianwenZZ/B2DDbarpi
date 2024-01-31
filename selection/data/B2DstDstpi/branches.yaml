@@ -1,5 +1,6 @@
 B2DstDstpi:
     # branches to add
+    "B_PVF_M": "B_PVFitD_M[0]"
     #define 4-vectors
     "vec4_Dst1D0K": "TLorentzVector(
         Dst1D0K_PX,
@@ -55,11 +56,24 @@ B2DstDstpi:
     "logDst2D0ProdMINipchi2": "log(find2Min(Dst2D0K_IPCHI2_OWNPV, Dst2D0H_IPCHI2_OWNPV))"
     "minDst2D0ProdPT": "find2Min(Dst2D0K_PT, Dst2D0H_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"
+    "logBH_PT": "log(BH_PT)"
 
     # for helicity angle
     # ...
 
     # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
     "Dst1D0K_ProbNNk_corr": "Dst1D0K_ProbNNk"
+    "Dst1D0H_ProbNNpi_corr": "Dst1D0H_ProbNNpi"
+    "Dst1H_ProbNNpi_corr": "Dst1H_ProbNNpi"
     "Dst2D0K_ProbNNk_corr": "Dst2D0K_ProbNNk"
+    "Dst2D0H_ProbNNpi_corr": "Dst2D0H_ProbNNpi"
+    "Dst2H_ProbNNpi_corr": "Dst2H_ProbNNpi"
     "BH_ProbNNpi_corr": "BH_ProbNNpi"
+
+    "Dst1D0K_ProbNNpi_corr": "Dst1D0K_ProbNNpi"
+    "Dst1D0H_ProbNNk_corr": "Dst1D0H_ProbNNk"
+    "Dst1H_ProbNNk_corr": "Dst1H_ProbNNk"
+    "Dst2D0K_ProbNNpi_corr": "Dst2D0K_ProbNNpi"
+    "Dst2D0H_ProbNNk_corr": "Dst2D0H_ProbNNk"
+    "Dst2H_ProbNNk_corr": "Dst2H_ProbNNk"
+    "BH_ProbNNk_corr": "BH_ProbNNk"

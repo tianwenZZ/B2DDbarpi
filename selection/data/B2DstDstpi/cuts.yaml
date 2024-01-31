@@ -5,6 +5,11 @@ B2DstDstpi:
   "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
   "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
 
+  "combined pi pid cut": "Dst1D0H_ProbNNpi_corr*(1-Dst1D0H_ProbNNk_corr)>0.2 \
+                          && Dst1H_ProbNNpi_corr*(1-Dst1H_ProbNNk_corr)>0.2 \
+                          && Dst2D0H_ProbNNpi_corr*(1-Dst2D0H_ProbNNk_corr)>0.2 \
+                          && Dst2H_ProbNNpi_corr*(1-Dst2H_ProbNNk_corr)>0.2 \
+                          && BH_ProbNNpi_corr*(1-BH_ProbNNk_corr)>0.2"
 
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"

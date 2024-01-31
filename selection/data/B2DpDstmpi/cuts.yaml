@@ -9,7 +9,13 @@ B2DpDstmpi:
   "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
 
 
+
   # preselection:
+  "combined pi pid cut": "DstD0H_ProbNNpi_corr*(1-DstD0H_ProbNNk_corr)>0.2 \
+                          && DstH_ProbNNpi_corr*(1-DstH_ProbNNk_corr)>0.2 \
+                          && DdH_ProbNNpi_corr*(1-DdH_ProbNNk_corr)>0.2 \
+                          && Ddh_ProbNNpi_corr*(1-Ddh_ProbNNk_corr)>0.2 \
+                          && BH_ProbNNpi_corr*(1-BH_ProbNNk_corr )>0.2"
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"
   "D candidates": "Dst_IPCHI2_OWNPV<100000 && Dst_IPCHI2_OWNPV>0 \
                   && Dd_IPCHI2_OWNPV<100000 && Dd_IPCHI2_OWNPV>0 \

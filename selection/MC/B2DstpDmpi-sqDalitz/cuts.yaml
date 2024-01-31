@@ -1,12 +1,4 @@
 MC_B2DstpDmpi-sqDalitz:
-  #DaVinci
-  "DaVinci_pid_cut_K": "DstD0K_ProbNNk_corr>0.1 && DstD0K_ProbNNk_corr<1 \
-                        && DdK_ProbNNk_corr>0.1 && DdK_ProbNNk_corr<1"
-  "DaVinci_pid_cut_pi": "DstD0H_ProbNNpi_corr>0.05 && DstD0H_ProbNNpi_corr<1 \
-                        && DstH_ProbNNpi_corr>0.05 && DstH_ProbNNpi_corr<1 \
-                        && DdH_ProbNNpi_corr>0.05 && DdH_ProbNNpi_corr<1 \
-                        && Ddh_ProbNNpi_corr>0.05 && Ddh_ProbNNpi_corr<1 \
-                        && BH_ProbNNpi_corr>0.05 && BH_ProbNNpi_corr<1"
 
   # trigger
   "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
@@ -26,6 +18,19 @@ MC_B2DstpDmpi-sqDalitz:
                 && DdH_MC_MOTHER_KEY==DdK_MC_MOTHER_KEY && DdH_MC_MOTHER_KEY==Ddh_MC_MOTHER_KEY \
                 && Dst_MC_MOTHER_KEY==Dd_MC_MOTHER_KEY && Dst_MC_MOTHER_KEY==BH_MC_MOTHER_KEY"
 
+  #DaVinci
+  "DaVinci_pid_cut_K": "DstD0K_ProbNNk_corr>0.1 && DstD0K_ProbNNk_corr<1 \
+                        && DdK_ProbNNk_corr>0.1 && DdK_ProbNNk_corr<1"
+  "DaVinci_pid_cut_pi": "DstD0H_ProbNNpi_corr>0.05 && DstD0H_ProbNNpi_corr<1 \
+                        && DstH_ProbNNpi_corr>0.05 && DstH_ProbNNpi_corr<1 \
+                        && DdH_ProbNNpi_corr>0.05 && DdH_ProbNNpi_corr<1 \
+                        && Ddh_ProbNNpi_corr>0.05 && Ddh_ProbNNpi_corr<1 \
+                        && BH_ProbNNpi_corr>0.05 && BH_ProbNNpi_corr<1"
+  "combined pi pid cut": "DstD0H_ProbNNpi_corr*(1-DstD0H_ProbNNk_corr)>0.2 \
+                          && DstH_ProbNNpi_corr*(1-DstH_ProbNNk_corr)>0.2 \
+                          && DdH_ProbNNpi_corr*(1-DdH_ProbNNk_corr)>0.2 \
+                          && Ddh_ProbNNpi_corr*(1-Ddh_ProbNNk_corr)>0.2 \
+                          && BH_ProbNNpi_corr*(1-BH_ProbNNk_corr )>0.2"
 
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30 && B_ENDVERTEX_CHI2>0"
