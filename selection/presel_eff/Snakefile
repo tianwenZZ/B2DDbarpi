@@ -5,6 +5,19 @@ import yaml
 #workpath=os.path.dirname(workflow.snakefile)
 
 
+data2MC_mode_dict={"B2DdDdPi": "B2DDpi",
+                   "B2DstDdPi2b": "B2DpDstmpi",
+                   "B2D0D0Pi2b2b": "B2D0D0pi2b2b",
+                   "B2DstDstPi2b2b": "B2DstDstpi",
+                   "B2DstDdPi2b": "B2DstpDmpi",
+}
+
+MC2data_mode_dict={"B2DDpi": "B2DdDdPi",
+                   "B2DpDstmpi": "B2DstDdPi2b",
+                   "B2D0D0pi2b2b": "B2D0D0Pi2b2b",
+                   "B2DstDstpi": "B2DstDstPi2b2b",
+                   "B2DstpDmpi": "B2DstDdPi2b",
+}
 
 rule presel_eff_MC:
     '''
@@ -26,3 +39,25 @@ rule presel_eff_MC:
                                 --selection-files {input.cuts} \
                                 --branches-files {input.branches} | tee {output.logs}'
 
+
+rule presel_eff_data:
+    '''
+    preselect data.
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "data/{mode}/cuts.yaml",
+        branches = "data/{mode}/branches.yaml",
+        files = "/data5/lhcb/zhoutw/B2DDbarpi/data_download/data_split/data_Run2.root",
+    params:
+        tree_name = lambda wildcards: MC2data_mode_dict[wildcards.mode]+"/DecayTree",
+    output:
+        files = output_path("presel_eff/data/{mode}/data_Run2.root"),
+        logs = output_path("presel_eff/data/{mode}/logs/data_Run2.log"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --input-tree-name {params.tree_name} \
+                                --output-file {output.files} \
+                                --mode {wildcards.mode} \
+                                --selection-files {input.cuts} \
+                                --branches-files {input.branches} | tee {output.logs}'
