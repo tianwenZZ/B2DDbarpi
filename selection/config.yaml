@@ -14,6 +14,7 @@ mc_modes:
   - B2DpDstmpi
   - B2D0D0pi2b2b
   - B2DstpDmpi
+  - B2DstDstpi
 
 data_modes:
   - B2DdDdPi
