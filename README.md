@@ -1,2 +1,2 @@
-计划：
-做筛选等的代码和snakemake做控制的代码放在这个大目录下,中间存出来的数据放在另一个大目录(workdir/B2DDbarpi/preselec, ...)下。
+This is for the CPV analysis in $B^+ \rightarrow D \bar{D} \pi^{+}$ decay.
+Codes for selections and fits are under this directory, while the output root files are saved in the `output` file.
