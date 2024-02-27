@@ -5,6 +5,10 @@ B2D0D0pi2b4b:
   "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
   "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
 
+  #DaVinci
+  "combined pi pid cut": "D2bH_ProbNNpi_corr * ( 1 - D2bH_ProbNNk_corr )>0.2 \
+                         && D4bHp_ProbNNpi_corr * ( 1 - D4bHp_ProbNNk_corr )>0.2 && D4bHm1_ProbNNpi_corr * ( 1- D4bHm1_ProbNNk_corr )>0.2 && D4bHm2_ProbNNpi_corr * ( 1 - D4bHm2_ProbNNk_corr )>0.2 \
+                         && BH_ProbNNpi_corr * ( 1- BH_ProbNNk_corr )>0.2" 
 
   # preselection:
   "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"

@@ -1,5 +1,6 @@
 B2D0D0pi2b4b:
     # branches to add
+    "B_PVF_M": "B_PVFitD_M[0]"
     #define 4-vectors
     "vec4_D2bK": "TLorentzVector(
         D2bK_PX,
@@ -36,6 +37,44 @@ B2D0D0pi2b4b:
         BH_PY,
         BH_PZ,
         sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bK_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_Kplus_PX[0],
+        B_PVFitB_Lambda_cplus_Kplus_PY[0],
+        B_PVFitB_Lambda_cplus_Kplus_PZ[0],
+        B_PVFitB_Lambda_cplus_Kplus_PE[0])"
+    "vec4_D4bH_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_piplus_PX[0],
+        B_PVFitB_Lambda_cplus_piplus_PY[0],
+        B_PVFitB_Lambda_cplus_piplus_PZ[0],
+        B_PVFitB_Lambda_cplus_piplus_PE[0])"
+    "vec4_D4bH0_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_piplus_0_PX[0],
+        B_PVFitB_Lambda_cplus_piplus_0_PY[0],
+        B_PVFitB_Lambda_cplus_piplus_0_PZ[0],
+        B_PVFitB_Lambda_cplus_piplus_0_PE[0])"
+    "vec4_D4bH1_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_piplus_1_PX[0],
+        B_PVFitB_Lambda_cplus_piplus_1_PY[0],
+        B_PVFitB_Lambda_cplus_piplus_1_PZ[0],
+        B_PVFitB_Lambda_cplus_piplus_1_PE[0])"
+    "vec4_D2bK_PVFitB": "TLorentzVector(
+        B_PVFitB_D0_Kplus_PX[0],
+        B_PVFitB_D0_Kplus_PY[0],
+        B_PVFitB_D0_Kplus_PZ[0],
+        B_PVFitB_D0_Kplus_PE[0])"
+    "vec4_D2bH_PVFitB": "TLorentzVector(
+        B_PVFitB_D0_piplus_PX[0],
+        B_PVFitB_D0_piplus_PY[0],
+        B_PVFitB_D0_piplus_PZ[0],
+        B_PVFitB_D0_piplus_PE[0])"
+    "vec4_D2b_PVFitB": "vec4_D2bK_PVFitB+vec4_D2bH_PVFitB"
+    "vec4_D4b_PVFitB": "vec4_D4bK_PVFitB+vec4_D4bH_PVFitB+vec4_D4bH0_PVFitB+vec4_D4bH1_PVFitB"
+    "vec4_BH_PVFitB": "TLorentzVector(
+        B_PVFitB_piplus_PX[0],
+        B_PVFitB_piplus_PY[0],
+        B_PVFitB_piplus_PZ[0],
+        B_PVFitB_piplus_PE[0])"
+
     #for very loose selection
     
     # for MVA
@@ -51,9 +90,22 @@ B2D0D0pi2b4b:
     "logD4bProdMINipchi2": "log(find4Min(D4bK_IPCHI2_OWNPV, D4bHp_IPCHI2_OWNPV, D4bHm1_IPCHI2_OWNPV, D4bHm2_IPCHI2_OWNPV))"
     "minD4bProdPT": "find4Min(D4bK_PT, D4bHp_PT, D4bHm1_PT, D4bHm2_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
+    "logBH_PT": "log(BH_PT)"
 
-    # for helicity angle
-    # ...
+    # for Dalitz variables and helicity angles
+    # "B_PVFitB_D0_Kplus_ID*B_ID<0" means D0 (D2b) is D0, and D4b is anti-D0.
+    # We define B+ -> D1 D2 pi+(3), where D1(D0) is same charge as B+ and D2(D0bar) is opposite charge as B+.
+    "m12": "(vec4_D2b_PVFitB+vec4_D4b_PVFitB).M()"
+    "m13": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()
+            +(B_PVFitB_D0_Kplus_ID*B_ID>0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()"
+    "m23": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()
+            +(B_PVFitB_D0_Kplus_ID*B_ID>0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()"
+    "cosHel12": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*cosHel(vec4_D2b_PVFitB, vec4_D4b_PVFitB, vec4_BH_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID*B_ID>0)*cosHel(vec4_D4b_PVFitB, vec4_D2b_PVFitB, vec4_BH_PVFitB)"
+    "cosHel13": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB)"
+    "cosHel23": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB)"
 
     # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
     "D2bK_ProbNNk_corr": "D2bK_ProbNNk"
