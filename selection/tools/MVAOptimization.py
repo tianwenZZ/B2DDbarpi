@@ -35,7 +35,7 @@ def EffMap(input_files, input_tree_name,
     graphs = {}
     for m in method_config.keys():
         t0 = method_config[m]
-        arr_mass = np.array([element[0] for element in arr0["B_PVFitD_M"]])
+        arr_mass = arr0["B_PVF_M"]
         arr = arr0[m][(arr_mass > mmin) & (arr_mass < mmax)]
         N0 = arr[arr > t0].size
         x = list(np.arange(t0, arr.max(), 0.01))
@@ -65,7 +65,7 @@ def Fit(input_files, input_tree,
     mB = RooRealVar("mB", "", xlow, xup)
     mB.setRange("SignalWindow", mmin, mmax)
     arr = load_data(input_tree, input_files)
-    arr_mass = np.array([element[0] for element in arr["B_PVFitD_M"]])
+    arr_mass = arr["B_PVF_M"]
 
     def myIntegral(pdf, x, nfull, range=""):
         intfull = pdf.createIntegral(x, RooFit.Range("")).getVal()

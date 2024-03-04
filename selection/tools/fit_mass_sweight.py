@@ -32,7 +32,8 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     nbins = 40
     xlow, xup = 5250, 5450
     xtitle = {"B2DDpi": "m(D^{+}D^{-}#pi^{+}) [MeV/c^{2}]",
-              "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
+              "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]",
+              "B2D0D0pi2b4b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
 
     x = RooRealVar("B_PVF_M", "mass", xlow, xup)
 
@@ -167,7 +168,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     sw_tree.Branch("sig_sw", sw, "sig_sw/D")
     index = -1
     for evt in ch:
-        if evt.B_PVFitD_M[0]<xlow or evt.B_PVFitD_M[0]>xup: continue
+        if evt.B_PVF_M<xlow or evt.B_PVF_M>xup: continue
         index += 1
         sw[0] = data.get(index).find("nsig_sw").getVal()
         sw_tree.Fill()
