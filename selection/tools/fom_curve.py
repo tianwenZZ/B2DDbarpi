@@ -19,27 +19,25 @@ def read_from_yaml(mode, selection_files):
     return selection_dict
 
 
-def plot(input_files, input_tree_name, output_file, method_config):
+def plot(input_files, input_tree_name, output_file, method_config, working_point):
     f = TFile(input_files, "r")
 
-    Use = read_from_yaml("MVAmethods", method_config)
-    for method in Use.keys():
-        if Use[method]:
-            fom = f.Get(input_tree_name+method)
-            can = TCanvas("can", "", 800, 600)
-            fom.GetHistogram().SetMinimum(0)
-            fom.GetHistogram().SetMaximum(fom.GetHistogram().GetMaximum()*1.1)
-            fom.Draw("ACP")
-            '''
-            ar = TArrow()
-            ar.SetAngle(40)
-            ar.SetLineWidth(2)
-            ar.SetLineColor(ROOT.kRed)
-            ar.SetFillColor(ROOT.kRed)
-            ar.DrawArrow(0.1, 0, 0.1, fom.Eval(0.1), 0.05, "|>")
-            '''
-            can.Print(output_file)
-            can.Close()
+    for i in range(len(method_config)):
+        method = method_config[i]
+        wp = working_point[i]
+        fom = f.Get(input_tree_name+method)
+        can = TCanvas("can", "", 800, 600)
+        fom.GetHistogram().SetMinimum(0)
+        fom.GetHistogram().SetMaximum(fom.GetHistogram().GetMaximum()*1.1)
+        fom.Draw("ACP")
+        ar = TArrow()
+        ar.SetAngle(40)
+        ar.SetLineWidth(2)
+        ar.SetLineColor(ROOT.kRed)
+        ar.SetFillColor(ROOT.kRed)
+        ar.DrawArrow(wp, 0, wp, fom.Eval(wp), 0.05, "|>")
+        can.Print(output_file)
+        can.Close()
 
 
 if __name__ == '__main__':
@@ -52,7 +50,8 @@ if __name__ == '__main__':
                         default='DecayTree', help='Name of the tree of file')
     parser.add_argument('--output-file', help='Output file name')
     parser.add_argument('--method-config', nargs='+',
-                        help='Yaml files of training methods and their configuration')
+                        help='Method to draw.')
+    parser.add_argument('--working-point', type=float, nargs='+', help='Working point of MVA')
     args = parser.parse_args()
 
     plot(**vars(args))

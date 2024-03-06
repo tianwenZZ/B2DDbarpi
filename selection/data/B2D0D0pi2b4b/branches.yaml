@@ -1,6 +1,9 @@
 B2D0D0pi2b4b:
     # branches to add
     "B_PVF_M": "B_PVFitD_M[0]"
+    "B_M": "B_M"
+    "D2b_M": "D2b_M"
+    "D4b_M": "D4b_M"
     #define 4-vectors
     "vec4_D2bK": "TLorentzVector(
         D2bK_PX,
@@ -78,6 +81,9 @@ B2D0D0pi2b4b:
     #for very loose selection
     
     # for MVA
+    "B_DiraAngle": "B_DiraAngle"
+    "B_IPCHI2_OWNPV": "B_IPCHI2_OWNPV"
+    "B_ENDVERTEX_CHI2": "B_ENDVERTEX_CHI2"
     "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
     "D2b_ZFDsig": "(D2b_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D2b_ENDVERTEX_ZERR*D2b_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
     "logD2bipchi2pv": "log(D2b_IPCHI2_OWNPV)"
@@ -95,17 +101,21 @@ B2D0D0pi2b4b:
     # for Dalitz variables and helicity angles
     # "B_PVFitB_D0_Kplus_ID*B_ID<0" means D0 (D2b) is D0, and D4b is anti-D0.
     # We define B+ -> D1 D2 pi+(3), where D1(D0) is same charge as B+ and D2(D0bar) is opposite charge as B+.
-    "m12": "(vec4_D2b_PVFitB+vec4_D4b_PVFitB).M()"
-    "m13": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()
-            +(B_PVFitB_D0_Kplus_ID*B_ID>0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()"
-    "m23": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()
-            +(B_PVFitB_D0_Kplus_ID*B_ID>0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()"
-    "cosHel12": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*cosHel(vec4_D2b_PVFitB, vec4_D4b_PVFitB, vec4_BH_PVFitB) + 
-    (B_PVFitB_D0_Kplus_ID*B_ID>0)*cosHel(vec4_D4b_PVFitB, vec4_D2b_PVFitB, vec4_BH_PVFitB)"
-    "cosHel13": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB) + 
-    (B_PVFitB_D0_Kplus_ID*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB)"
-    "cosHel23": "(B_PVFitB_D0_Kplus_ID*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB) + 
-    (B_PVFitB_D0_Kplus_ID*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB)"
+    "m12": "(vec4_D2b_PVFitB+vec4_D4b_PVFitB).M()/1000"
+    "m13": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()/1000
+            +(B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()/1000"
+    "m23": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()/1000
+            +(B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()/1000"
+    "cosHel12": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*cosHel(vec4_D2b_PVFitB, vec4_D4b_PVFitB, vec4_BH_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*cosHel(vec4_D4b_PVFitB, vec4_D2b_PVFitB, vec4_BH_PVFitB)"
+    "cosHel13": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB)"
+    "cosHel23": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB)"
+    "m12Sq": "m12*m12"
+    "m13Sq": "m13*m13"
+    "m23Sq": "m23*m23"
+    "pq13": "getpq(m13, (B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*vec4_D2b_PVFitB.M()/1000+(B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*vec4_D4b_PVFitB.M()/1000, vec4_BH_PVFitB.M()/1000)"
 
     # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
     "D2bK_ProbNNk_corr": "D2bK_ProbNNk"

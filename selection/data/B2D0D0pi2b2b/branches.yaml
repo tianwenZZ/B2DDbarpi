@@ -1,6 +1,9 @@
 B2D0D0pi2b2b:
     # branches to add
     "B_PVF_M": "B_PVFitD_M[0]"
+    "B_M": "B_M"
+    "D1_M": "D1_M"
+    "D2_M": "D2_M"
     #define 4-vectors
     "vec4_D1K": "TLorentzVector(
         D1K_PX,
@@ -78,6 +81,9 @@ B2D0D0pi2b2b:
     #for very loose selection
     
     # for MVA
+    "B_DiraAngle": "B_DiraAngle"
+    "B_IPCHI2_OWNPV": "B_IPCHI2_OWNPV"
+    "B_ENDVERTEX_CHI2": "B_ENDVERTEX_CHI2"
     "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
     "D1_ZFDsig": "(D1_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D1_ENDVERTEX_ZERR*D1_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
     "logD1ipchi2pv": "log(D1_IPCHI2_OWNPV)"
@@ -93,12 +99,16 @@ B2D0D0pi2b2b:
     "logBH_PT": "log(BH_PT)"
 
     # for Dalitz variables and helicity angles
-    "m12": "(vec4_D1_PVFitB+vec4_D2_PVFitB).M()"
-    "m13": "(vec4_D1_PVFitB+vec4_BH_PVFitB).M()"
-    "m23": "(vec4_D2_PVFitB+vec4_BH_PVFitB).M()"
+    "m12": "(vec4_D1_PVFitB+vec4_D2_PVFitB).M()/1000"
+    "m13": "(vec4_D1_PVFitB+vec4_BH_PVFitB).M()/1000"
+    "m23": "(vec4_D2_PVFitB+vec4_BH_PVFitB).M()/1000"
     "cosHel12": "cosHel(vec4_D1_PVFitB, vec4_D2_PVFitB, vec4_BH_PVFitB)"
     "cosHel13": "cosHel(vec4_BH_PVFitB, vec4_D1_PVFitB, vec4_D2_PVFitB)"
     "cosHel23": "cosHel(vec4_BH_PVFitB, vec4_D2_PVFitB, vec4_D1_PVFitB)"
+    "m12Sq": "m12*m12"
+    "m13Sq": "m13*m13"
+    "m23Sq": "m23*m23"
+    "pq13": "getpq(m13, vec4_D1_PVFitB.M()/1000, vec4_BH_PVFitB.M()/1000)"
 
 
     # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.

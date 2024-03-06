@@ -1,6 +1,11 @@
 B2DstDstpi:
     # branches to add
     "B_PVF_M": "B_PVFitD_M[0]"
+    "B_M": "B_M"
+    "Dst1_M": "Dst1_M"
+    "Dst1D0_M": "Dst1D0_M"
+    "Dst2_M": "Dst2_M"
+    "Dst2D0_M": "Dst2D0_M"
     #define 4-vectors
     "vec4_Dst1D0K": "TLorentzVector(
         Dst1D0K_PX,
@@ -40,7 +45,10 @@ B2DstDstpi:
     #for very loose selection
     
     # for MVA
+    "B_DiraAngle": "B_DiraAngle"
+    "B_ENDVERTEX_CHI2": "B_ENDVERTEX_CHI2"
     "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "B_IPCHI2_OWNPV": "B_IPCHI2_OWNPV"
     "Dst1_ZFDsig": "(Dst1_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(Dst1_ENDVERTEX_ZERR*Dst1_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
     "Dst1D0_ZFDsig": "(Dst1D0_ENDVERTEX_Z-Dst1_ENDVERTEX_Z)/sqrt(Dst1D0_ENDVERTEX_ZERR*Dst1D0_ENDVERTEX_ZERR+Dst1_ENDVERTEX_ZERR*Dst1_ENDVERTEX_ZERR)"
     "logDst1ipchi2pv": "log(Dst1_IPCHI2_OWNPV)"

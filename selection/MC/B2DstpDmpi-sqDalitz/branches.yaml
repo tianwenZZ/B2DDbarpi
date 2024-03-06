@@ -1,6 +1,10 @@
 MC_B2DstpDmpi-sqDalitz:
     # branches to add
     "B_PVF_M": "B_PVFitD_M[0]"
+    "B_M": "B_M"
+    "Dst_M": "Dst_M"
+    "DstD0_M": "DstD0_M"
+    "Dd_M": "Dd_M"
     #define 4-vectors
     "vec4_DdK": "TLorentzVector(
         DdK_PX,
@@ -40,7 +44,10 @@ MC_B2DstpDmpi-sqDalitz:
     #for very loose selection
     
     # for MVA
+    "B_DiraAngle": "B_DiraAngle"
+    "B_ENDVERTEX_CHI2": "B_ENDVERTEX_CHI2"
     "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "B_IPCHI2_OWNPV": "B_IPCHI2_OWNPV"
     "Dst_ZFDsig": "(Dst_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(Dst_ENDVERTEX_ZERR*Dst_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
     "DstD0_ZFDsig": "(DstD0_ENDVERTEX_Z-Dst_ENDVERTEX_Z)/sqrt(DstD0_ENDVERTEX_ZERR*DstD0_ENDVERTEX_ZERR+Dst_ENDVERTEX_ZERR*Dst_ENDVERTEX_ZERR)"
     "logDstipchi2pv": "log(Dst_IPCHI2_OWNPV)"
@@ -54,6 +61,24 @@ MC_B2DstpDmpi-sqDalitz:
     "minDdProdPT": "find3Min(DdK_PT, DdH_PT, Ddh_PT)"
     "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"
     "logBH_PT": "log(BH_PT)"
+
+
+    # for pid corr variables. data probNNCorr= probNN_corr for the convenience of further analysis like MVA.
+    "DstD0K_ProbNNk_corr": "DstD0K_ProbNNk_corr"
+    "DstD0H_ProbNNpi_corr": "DstD0H_ProbNNpi_corr"
+    "DstH_ProbNNpi_corr": "DstH_ProbNNpi_corr"
+    "DdK_ProbNNk_corr": "DdK_ProbNNk_corr"
+    "DdH_ProbNNpi_corr": "DdH_ProbNNpi_corr"
+    "Ddh_ProbNNpi_corr" : "Ddh_ProbNNpi_corr"
+    "BH_ProbNNpi_corr": "BH_ProbNNpi_corr"
+    
+    "DstD0K_ProbNNpi_corr": "DstD0K_ProbNNpi_corr"
+    "DstD0H_ProbNNk_corr": "DstD0H_ProbNNk_corr"
+    "DstH_ProbNNk_corr": "DstH_ProbNNk_corr"
+    "DdK_ProbNNpi_corr": "DdK_ProbNNpi_corr"
+    "DdH_ProbNNk_corr": "DdH_ProbNNk_corr"
+    "Ddh_ProbNNk_corr" : "Ddh_ProbNNk_corr"
+    "BH_ProbNNk_corr": "BH_ProbNNk_corr"
 
     # for helicity angle
     # ...

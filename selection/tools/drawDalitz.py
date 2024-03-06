@@ -16,30 +16,54 @@ mD0 = 1.86486000  # D0
 mK0 = 0.49761400  # K0
 mpi = 0.13957039  # pi+
 margin = 0.05
-nbins = 40
+nbins = 40 
 
 phsp = {"B2DDpi": DalitzPhaseSpace(mB, mDp, mDp, mpi),
-        "B2D0D0pi2b2b": DalitzPhaseSpace(mB, mD0, mD0, mpi)
+        "B2D0D0pi": DalitzPhaseSpace(mB, mD0, mD0, mpi)
         }
 
 axis_title_2d = {"B2DDpi":
                  {"m12": "m_{D^{+}D^{-}}^{2} [GeV^{2}]",
                   "m13": "m_{D^{+}#pi^{+}}^{2} [GeV^{2}]",
-                  "m23": "m_{D^{-}#pi^{+}}^{2} [GeV^{2}]"},
+                  "m23": "m_{D^{-}#pi^{+}}^{2} [GeV^{2}]"
+                  },
                  "B2D0D0pi2b2b":
                  {"m12": "m_{D^{0}#bar{D^{0}}}^{2} [GeV^{2}]",
                      "m13": "m_{D^{0}#pi^{+}}^{2} [GeV^{2}]",
-                     "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"}
+                     "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"
+                },
+                 "B2D0D0pi2b4b":
+                 {"m12": "m_{D^{0}#bar{D^{0}}}^{2} [GeV^{2}]",
+                     "m13": "m_{D^{0}#pi^{+}}^{2} [GeV^{2}]",
+                     "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"
+                },
+                 "B2D0D0pi":
+                 {"m12": "m_{D^{0}#bar{D^{0}}}^{2} [GeV^{2}]",
+                     "m13": "m_{D^{0}#pi^{+}}^{2} [GeV^{2}]",
+                     "m23": "m_{#bar{D}^{0}#pi^{+}}^{2} [GeV^{2}]"
+                },
                  }
 
 axis_title_1d = {"B2DDpi":
                  {"m12": "m_{D^{+}D^{-}} [GeV/c^{2}]",
                   "m13": "m_{D^{+}#pi^{+}} [GeV/c^{2}]",
-                  "m23": "m_{D^{-}#pi^{+}} [GeV/c^{2}]"},
+                  "m23": "m_{D^{-}#pi^{+}} [GeV/c^{2}]",
+                  },
                  "B2D0D0pi2b2b":
                  {"m12": "m_{D^{0}#bar{D^{0}}} [GeV/c^{2}]",
                      "m13": "m_{D^{0}#pi^{+}} [GeV/c^{2}]",
-                     "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]"}
+                     "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]",
+                     },
+                 "B2D0D0pi2b4b":
+                 {"m12": "m_{D^{0}#bar{D^{0}}} [GeV/c^{2}]",
+                     "m13": "m_{D^{0}#pi^{+}} [GeV/c^{2}]",
+                     "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]",
+                     },
+                 "B2D0D0pi":
+                 {"m12": "m_{D^{0}#bar{D^{0}}} [GeV/c^{2}]",
+                     "m13": "m_{D^{0}#pi^{+}} [GeV/c^{2}]",
+                     "m23": "m_{#bar{D}^{0}#pi^{+}} [GeV/c^{2}]",
+                     },
                  }
 
 gROOT.ProcessLine(".x ~/lhcbStyle.C")
@@ -82,10 +106,10 @@ def drawDalitz(input_files, input_tree_name, output_file_path,
     if not sw:
         sw = ""
     # The unit of m12/m13/m23 in tree branches is MeV by default. Convert MeV to GeV.
-    expr = f"{yv}*{yv}/1000000:{xv}*{xv}/1000000"
+    expr = f"{yv}*{yv}:{xv}*{xv}"
     chain.Project("hscatter", expr)   # Draw with sw will cause PROBLEMS !!!
     for m1d in ["m12", "m13", "m23"]:
-        chain.Project("h"+m1d, m1d+"/1000", sw)
+        chain.Project("h"+m1d, m1d, sw)
         hist[m1d].SetXTitle(axis_title_1d[mode][m1d])
 
     def get_bachelor(ind_x, ind_y):

@@ -3,6 +3,7 @@ from os.path import isfile, join
 
 workpath=os.path.dirname(workflow.snakefile)
 
+
 rule mva_train:
     '''
     do mva training
@@ -100,11 +101,13 @@ rule draw_fom_curve:
         files = rules.mva_optimize.output.files,
         script = "tools/fom_curve.py",
     params:
-        method = rules.mva_train.params.method,
+        method = "BDT",
+        working_point = lambda wildcards: config["working_points_BDT"][wildcards.mode],
     output:
         files = output_path("mva/optimize/{mode}/fom_curve.pdf"),
     shell:
         'python3 {input.script} --input-files {input.files} \
                                 --input-tree-name fom_ \
                                 --output-file {output.files} \
-                                --method-config {params.method}'
+                                --method-config {params.method} \
+                                --working-point {params.working_point} '

@@ -73,6 +73,8 @@ def apply_selection(input_files, input_tree_name, output_file, output_tree_name,
         gInterpreter.LoadMacro('tools/find3Min.cpp')
         gInterpreter.LoadMacro('tools/find4Min.cpp')
         gInterpreter.LoadMacro('tools/cosHel.cpp')
+        gInterpreter.LoadMacro('tools/getpq.cpp')
+
 
         # add new branches
         for branch in branches_to_add.keys():
@@ -128,7 +130,7 @@ if __name__ == '__main__':
                         help='Yaml files with selection')
     parser.add_argument('--branches-files', nargs='+',
                         help='Yaml files with branches')
-    parser.add_argument('--keep-all-original-branches', default=True,
+    parser.add_argument('--keep-all-original-branches', default=False, 
                         help='Keeps all original branches if True, only adds specified branches if False') #always want to keep all original branches
     args = parser.parse_args()
     apply_selection(**vars(args))

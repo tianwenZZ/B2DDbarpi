@@ -1,5 +1,44 @@
 import os
 
+
+rule check_apply_cuts_prefit_data:
+    '''
+    Apply BDT and combined pid cuts before mass fit of data to checkif tigher BDT will reduce D*(2640)+ structure.
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "checks/data/{mode}/cuts.yaml",
+        files = rules.mva_apply_data.output.files,
+    output:
+        files = output_path("checks/data/{mode}/prefit/data_Run2_prefit.root"),
+        logs = output_path("checks/data/{mode}/prefit/logs/data_Run2_prefit.log")
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --output-file {output.files} \
+                                --mode {wildcards.mode} \
+                                --selection-files {input.cuts} | tee {output.logs}'
+
+rule check_fit_data_sw:
+    '''
+    S-Fit the data sample.
+    '''
+    input:
+        script = "tools/fit_mass_sweight.py",
+        files = rules.check_apply_cuts_prefit_data.output.files,
+        funcs = rules.massfit_MC_frac_fixed.output.funcs,
+    output:
+        files = output_path("checks/data/{mode}/data_sw.root"),
+        logs = output_path("checks/data/{mode}/logs/fit_Bmass.log"),
+        funcs = output_path("checks/data/{mode}/data_shape.txt"),
+        cfit_figs = output_path("checks/data/{mode}/fit_Bmass.pdf"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --in-func {input.funcs} \
+                                --mode {wildcards.mode} \
+                                --out-func {output.funcs} \
+                                --cfit-figs {output.cfit_figs} \
+                                --output-files {output.files} | tee {output.logs}'
+
 rule check_data_Dalitz:
     '''
     Check Dalitz structures of data with sweight (bkg substracted)
@@ -7,6 +46,8 @@ rule check_data_Dalitz:
     input:
         script = "tools/drawDalitz.py",
         files = rules.fit_data_sw.output.files,
+        #files = rules.check_fit_data_sw.output.files,
+        #files = ["output/massfit/data/B2D0D0pi2b4b_manual/data_sw.root", "output/massfit/data/B2D0D0pi2b2b/data_sw.root"]
     params:
         sw = "sig_sw",
         dalitz_vars = ["m13", "m12"],
@@ -20,4 +61,22 @@ rule check_data_Dalitz:
                                 --mode {wildcards.mode} \
                                 --dalitz-vars {params.dalitz_vars} | tee {output.logs}'
 
-
+rule check_Bmass_afterMVA:
+    '''
+    Compare the invariant mass of B before and after MVA selection.
+    '''
+    input:
+        script = "tools/dataAfterMVA.py",
+        files = rules.mva_apply_data.output.files,
+    params:
+        method = "BDT",
+        working_point = lambda wildcards: config["working_points_BDT"][wildcards.mode],
+    output:
+        file_dir = directory(output_path("checks/dataAfterMVA/{mode}/")),
+        logs = output_path("checks/dataAfterMVA/{mode}/logs/drawaftermva.log"),
+    shell:
+        'python3 {input.script} --input-files {input.files} \
+                                --output-file-path {output.file_dir} \
+                                --mode {wildcards.mode} \
+                                --method {params.method} \
+                                --working-point {params.working_point} | tee {output.logs}'

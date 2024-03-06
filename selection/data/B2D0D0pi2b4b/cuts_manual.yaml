@@ -1,0 +1,10 @@
+B2D0D0pi2b4b:
+    "B Candidate": "B_DiraAngle<0.01 && B_ENDVERTEX_CHI2<15 && B_IPCHI2_OWNPV<10 && logB_fdchi2>3"
+    "D Candidate flight distance": "D2b_ZFDsig>0 && D4b_ZFDsig>0"
+    "pi combined pid": "D2bH_ProbNNpi_corr*(1-D2bH_ProbNNk_corr)>0.3 && D4bHp_ProbNNpi_corr*(1-D4bHp_ProbNNk_corr)>0.3 && D4bHm1_ProbNNpi_corr*(1-D4bHm1_ProbNNk_corr)>0.3 && D4bHm2_ProbNNpi_corr*(1-D4bHm2_ProbNNk_corr)>0.3 " 
+    "DK pid cut": "D2bK_ProbNNk_corr>0.4 && D4bK_ProbNNk_corr>0.4"
+    "D candidate chi2": "logD2bipchi2pv>0 && logD2bProdMINipchi2>2 \
+                         && logD4bipchi2pv>0 && logD4bProdMINipchi2>2"
+    "D candidate pt": "minD4bProdPT>100 && minD2bProdPT>100"
+    "Bachelor pi": "logBH_ipchi2pv>3 && logBH_PT>6.5 && BH_ProbNNpi_corr*(1-BH_ProbNNk_corr)>0.3"
+

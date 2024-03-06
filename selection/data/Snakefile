@@ -58,3 +58,21 @@ rule merge_data:
         'hadd {output.files} {input}'
 
 
+rule apply_selection_manual:
+    '''
+    Select data manually for B2D0D0pi2b4b.
+    '''
+    input:
+        script = "tools/apply_selection.py",
+        cuts = "data/{mode}/cuts_manual.yaml",
+        files = rules.merge_data.output.files,
+    output:
+        files = output_path("preselection/data/{mode}_manual/data_Run2.root"),
+        logs = output_path("preselection/data/{mode}_manual/logs/data_Run2.log"),
+    shell:
+        'python3 {input.script} --input-file {input.files} \
+                                --input-tree-name DecayTree \
+                                --output-file {output.files} \
+                                --mode {wildcards.mode} \
+                                --selection-files {input.cuts} | tee {output.logs}'
+
