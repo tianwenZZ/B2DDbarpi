@@ -1,0 +1,34 @@
+configfile: "config.yaml"
+
+include: "helpers.smk"
+
+wildcard_constraints:
+    year="\d{4}",
+
+
+"""
+Set of rules to produce ntuples for B+ -> D Dbar pi+ analysis.
+Available wildcards are defined in config.yaml
+"""
+
+
+# rule help:
+#    """
+#    Print list of all targets with help.
+#    """
+#    run:
+#        for rule in workflow.rules:
+#            print(rule.name)
+#            print(rule.docstring)
+
+MCID=list(range(309,354))+list(range(361,388))
+
+
+include: "download/Snakefile"
+include: "PIDCorr/Snakefile"
+
+rule all:
+    input:
+        #expand(rules.merge_MC.output.files, mode=config["mc_modes"], year=config["years"], mag=config["polarities"]),
+        #expand(rules.PIDCorr.output.files, mode="B2DDpi", year="2015", mag="md"),
+        expand(rules.PIDCorr.output.files, mode=config["mc_modes"], year=config["years"], mag=config["polarities"])
