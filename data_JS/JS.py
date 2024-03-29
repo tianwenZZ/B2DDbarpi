@@ -18,7 +18,6 @@ def create_job(Name,Application,OptsFile,bkk_directory,NFilePerJob,MaxFiles,Outp
    job.submit()
 
 #
-"""
 bkk=("/LHCb/Collision18/Beam6500GeV-VeloClosed-MagDown/Real Data/Reco18/Stripping34/90000000/BHADRON.MDST")  #14653files
 create_job("B2DDbarpi-dv18-down",AppDt,"dv18.py",bkk,30,-1)
 bkk=("/LHCb/Collision18/Beam6500GeV-VeloClosed-MagUp/Real Data/Reco18/Stripping34/90000000/BHADRON.MDST")  #
@@ -28,7 +27,6 @@ bkk=("/LHCb/Collision17/Beam6500GeV-VeloClosed-MagDown/Real Data/Reco17/Strippin
 create_job("B2DDbarpi-dv17-down",AppDt,"dv17.py",bkk,30,-1)
 bkk=("/LHCb/Collision17/Beam6500GeV-VeloClosed-MagUp/Real Data/Reco17/Stripping29r2/90000000/BHADRON.MDST")  #
 create_job("B2DDbarpi-dv17-up",AppDt,"dv17.py",bkk,30,-1)
-"""
 
 bkk=("/LHCb/Collision16/Beam6500GeV-VeloClosed-MagDown/Real Data/Reco16/Stripping28r2/90000000/BHADRON.MDST")  #14653files
 create_job("B2DDbarpi-dv16-down",AppDt,"dv16.py",bkk,60,-1)
