@@ -1,0 +1,10 @@
+rule PIDCorr:
+    input:
+        script = "PIDCorr/{mode}_pidcorr.py",
+        files = rules.merge_MC.output.files,
+    output:
+        files = output_path("PIDCorr/{mode}-sqDalitz/{mode}-sqDalitz_{year}_{mag}_pidcorr.root"),
+        logs = output_path("PIDCorr/logs/{mode}-sqDalitz-{year}_{mag}_pidcorr.log"),
+    shell:
+        'lb-run -c best Urania/v10r1 python {input.script} --input-file {input.files} \
+        --output-file {output.files} | tee {output.logs}'
