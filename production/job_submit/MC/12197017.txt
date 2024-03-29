@@ -1,0 +1,24 @@
+/MC/2018/Beam6500GeV-2018-MagUp-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20190430-vc-mu100 1 100 207201
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207203)
+/MC/2018/Beam6500GeV-2018-MagUp-Nu1.6-25ns-Pythia8/Sim09m/Trig0x617d18a4/Reco18/Turbo05-WithTurcal/Stripping34NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20190430-vc-mu100 14 638778 207203
+/MC/2018/Beam6500GeV-2018-MagDown-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20190430-vc-md100 1 100 207234
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207236)
+/MC/2018/Beam6500GeV-2018-MagDown-Nu1.6-25ns-Pythia8/Sim09m/Trig0x617d18a4/Reco18/Turbo05-WithTurcal/Stripping34NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20190430-vc-md100 14 634441 207236
+/MC/2017/Beam6500GeV-2017-MagUp-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20190430-1-vc-mu100 1 100 207263
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207265)
+/MC/2017/Beam6500GeV-2017-MagUp-Nu1.6-25ns-Pythia8/Sim09m/Trig0x62661709/Reco17/Turbo04a-WithTurcal/Stripping29r2NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20190430-1-vc-mu100 15 663836 207265
+/MC/2017/Beam6500GeV-2017-MagDown-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20190430-1-vc-md100 1 100 207293
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207295)
+/MC/2017/Beam6500GeV-2017-MagDown-Nu1.6-25ns-Pythia8/Sim09m/Trig0x62661709/Reco17/Turbo04a-WithTurcal/Stripping29r2NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20190430-1-vc-md100 14 664949 207295
+/MC/2016/Beam6500GeV-2016-MagUp-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20170721-2-vc-mu100 1 100 207361
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207363)
+/MC/2016/Beam6500GeV-2016-MagUp-Nu1.6-25ns-Pythia8/Sim09m/Trig0x6139160F/Reco16/Turbo03a/Stripping28r2NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20170721-2-vc-mu100 13 636497 207363
+/MC/2016/Beam6500GeV-2016-MagDown-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20170721-2-vc-md100 1 100 207391
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207393)
+/MC/2016/Beam6500GeV-2016-MagDown-Nu1.6-25ns-Pythia8/Sim09m/Trig0x6139160F/Reco16/Turbo03a/Stripping28r2NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20170721-2-vc-md100 14 638400 207393
+/MC/2015/Beam6500GeV-2015-MagUp-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20161124-vc-mu100 1 100 207460
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207462)
+/MC/2015/Beam6500GeV-2015-MagUp-Nu1.6-25ns-Pythia8/Sim09m/Trig0x411400a2/Reco15a/Turbo02/Stripping24r2NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20161124-vc-mu100 9 173261 207462
+/MC/2015/Beam6500GeV-2015-MagDown-Nu1.6-25ns-Pythia8/Sim09m/12197017/GAUSSHISTMERGED dddb-20170721-3 sim-20161124-vc-md100 1 100 207490
+DB tags are not set: they will be retrieved from the parent production(s) (prod: 207492)
+/MC/2015/Beam6500GeV-2015-MagDown-Nu1.6-25ns-Pythia8/Sim09m/Trig0x411400a2/Reco15a/Turbo02/Stripping24r2NoPrescalingFlagged/12197017/ALLSTREAMS.MDST dddb-20170721-3 sim-20161124-vc-md100 10 169873 207492
