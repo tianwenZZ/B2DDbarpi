@@ -1,0 +1,26 @@
+rule run_getlfn_jobs_MC:
+    '''
+    Download MC from grid. LHCb environment and proxy is needed.
+    '''
+    input:
+        script = "download/MC/getlfn_jobs_{ii}.sh",
+    output:
+        log = output_path("download/MC/split/logs/getlfn_jobs_{ii}.log"),
+    run:
+        path=f"{wildcards.ii}/"
+        #if not os.path.isdir(path) and os.path.exists("getlfn_jobs_{wildcards.ii}.sh"):
+        if os.path.exists(input.script):
+            shell(f"cd output/download/MC/split/ && source ../../../../{input.script} > {output.log} 2>&1 || true")
+        else:
+            shell(f'echo "{input.script} not exists!" > {output.log}')
+
+rule merge_MC:
+    input:
+        map_file = "download/MC/jobid_name_map.json",
+        script = "download/MC/hadd_root.py",
+        prerequisite = expand(rules.run_getlfn_jobs_MC.output.log, ii=MCID),
+    output:
+        files = output_path("download/MC/{mode}/{mode}_{year}_{mag}.root"),
+        logs = output_path("download/MC/logs/{mode}_{year}_{mag}.log"),
+    shell:
+        'python3 {input.script} --target {output.files} --source-map {input.map_file} | tee {output.logs}'
