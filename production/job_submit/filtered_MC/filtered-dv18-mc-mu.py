@@ -668,4 +668,4 @@ DaVinci().UserAlgorithms = flts + dtts + mct
 DaVinci().CondDBtag = conf_mc_mdst_restrip['condb']%(conf_mc_mdst_restrip['polarity'])
 DaVinci().DDDBtag = conf_mc_mdst_restrip['dddb']
 
-#DaVinci().Input=["root://eoslhcb.cern.ch//eos/lhcb/grid/prod/lhcb/MC/2018/ALLSTREAMS.MDST/00207257/0000/00207257_00000008_1.allstreams.mdst"]  
+#DaVinci().Input=["root://eoslhcb.cern.ch//eos/lhcb/grid/prod/lhcb/MC/2018/B2DDPI.STRIP.MDST/00219132/0000/00219132_00000001_1.b2ddpi.strip.mdst"]  
