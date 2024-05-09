@@ -23,7 +23,7 @@ def hadd(target, source_map):
         jobids.append(mapJobidNames[jobname+"_splitted"])
     
     # Run the hadd.
-    command = f'hadd {target} '
+    command = f'lb-run DaVinci/v44r10p5 hadd {target} '
     for i in jobids:
         command += f'output/download/MC/split/{i}/* '
     subprocess.Popen(command, shell=True)
