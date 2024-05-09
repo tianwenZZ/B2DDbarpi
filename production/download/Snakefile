@@ -7,12 +7,7 @@ rule run_getlfn_jobs_MC:
     output:
         log = output_path("download/MC/split/logs/getlfn_jobs_{ii}.log"),
     run:
-        path=f"{wildcards.ii}/"
-        #if not os.path.isdir(path) and os.path.exists("getlfn_jobs_{wildcards.ii}.sh"):
-        if os.path.exists(input.script):
-            shell(f"cd output/download/MC/split/ && source ../../../../{input.script} > {output.log} 2>&1 || true")
-        else:
-            shell(f'echo "{input.script} not exists!" > {output.log}')
+        shell(f"cd output/download/MC/split/ && source ../../../../{input.script} > {output.log} 2>&1 || true")
 
 rule merge_MC:
     input:
