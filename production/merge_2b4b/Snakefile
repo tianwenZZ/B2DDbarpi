@@ -1,0 +1,9 @@
+rule merge_2b4b_MC:
+    input:
+        #files = expand(rules.PIDCorr.output.files, mode=["B2D0D0bpi2b4b","B2D0D0bpi4b2b"], year='{year}', mag='{mag}'),
+        files = expand("output/PIDCorr/{mode}-sqDalitz/{mode}-sqDalitz_{year}_{mag}_pidcorr.root", mode=["B2D0D0bpi2b4b","B2D0D0bpi4b2b"], year='{year}', mag='{mag}')
+    output:
+        files = output_path("PIDCorr/B2D0D0pi2b4b-sqDalitz/B2D0D0pi2b4b-sqDalitz_{year}_{mag}_pidcorr.root"),
+        logs = output_path("PIDCorr/logs/merge_B2D0D0pi2b4b-sqDalitz-{year}_{mag}_pidcorr.log"),
+    shell:
+        'lb-run DaVinci/v44r10p5 hadd {output.files} {input.files} | tee {output.logs}'
