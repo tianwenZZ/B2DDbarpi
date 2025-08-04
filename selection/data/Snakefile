@@ -17,7 +17,8 @@ MC2data_mode_dict={"B2DDpi": "B2DdDdPi",
                    "B2D0D0pi2b2b": "B2D0D0Pi2b2b",
                    "B2DstDstpi": "B2DstDstPi2b2b",
                    "B2DstpDmpi": "B2DstDdPi2b",
-                   "B2D0D0pi2b4b": "B2D0D0Pi2b4b",
+                   "B2D0D0bpi2b4b": "B2D0D0Pi2b4b",
+                   "B2D0D0bpi4b2b": "B2D0D0Pi2b4b",
 }
 
 rule apply_preselection_data:
@@ -57,22 +58,4 @@ rule merge_data:
     shell:
         'hadd {output.files} {input}'
 
-
-rule apply_selection_manual:
-    '''
-    Select data manually for B2D0D0pi2b4b.
-    '''
-    input:
-        script = "tools/apply_selection.py",
-        cuts = "data/{mode}/cuts_manual.yaml",
-        files = rules.merge_data.output.files,
-    output:
-        files = output_path("preselection/data/{mode}_manual/data_Run2.root"),
-        logs = output_path("preselection/data/{mode}_manual/logs/data_Run2.log"),
-    shell:
-        'python3 {input.script} --input-file {input.files} \
-                                --input-tree-name DecayTree \
-                                --output-file {output.files} \
-                                --mode {wildcards.mode} \
-                                --selection-files {input.cuts} | tee {output.logs}'
 

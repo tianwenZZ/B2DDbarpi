@@ -28,7 +28,7 @@ rule presel_eff_MC:
         script = "tools/apply_selection.py",
         cuts = "MC/{mode}-sqDalitz/cuts.yaml",
         branches = "MC/{mode}-sqDalitz/branches.yaml",
-        files = "/data5/lhcb/zhoutw/B2DDbarpi/MC_download/{mode}-sqDalitz/MC_Run2_pidcorr.root",
+        files = "/home/zhoutw/workdir/B2DDbarpi/git-repo/production/output/PIDCorr/{mode}-sqDalitz/MC_Run2_pidcorr.root",
     output:
         files = output_path("presel_eff/MC/{mode}/MC_Run2.root"),
         logs = output_path("presel_eff/MC/{mode}/logs/MC_Run2.log"),

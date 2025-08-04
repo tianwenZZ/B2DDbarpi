@@ -58,7 +58,7 @@ rule massfit_MC_frac_fixed:
 
 rule apply_cuts_prefit_data:
     '''
-    Apply BDT and combined pid cuts before mass fit of data.
+    Apply BDT cuts before mass fit of data.
     '''
     input:
         script = "tools/apply_selection.py",
@@ -94,24 +94,3 @@ rule fit_data_sw:
                                 --cfit-figs {output.cfit_figs} \
                                 --output-files {output.files} | tee {output.logs}'
 
-
-rule fit_data_sw_manual:
-    '''
-    S-Fit the data sample for B2D0D0pi2b4b.
-    '''
-    input:
-        script = "tools/fit_mass_sweight.py",
-        files = rules.apply_selection_manual.output.files,
-        funcs = expand(rules.massfit_MC_frac_fixed.output.funcs, mode="B2D0D0pi2b2b"),
-    output:
-        files = output_path("massfit/data/{mode}_manual/data_sw.root"),
-        logs = output_path("massfit/data/{mode}_manual/logs/fit_Bmass.log"),
-        funcs = output_path("massfit/data/{mode}_manual/data_shape.txt"),
-        cfit_figs = output_path("massfit/data/{mode}_manual/fit_Bmass.pdf"),
-    shell:
-        'python3 {input.script} --input-file {input.files} \
-                                --in-func {input.funcs} \
-                                --mode {wildcards.mode} \
-                                --out-func {output.funcs} \
-                                --cfit-figs {output.cfit_figs} \
-                                --output-files {output.files} | tee {output.logs}'

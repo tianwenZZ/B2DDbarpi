@@ -14,7 +14,8 @@ rule apply_preselection_MC:
         script = "tools/apply_selection.py",
         cuts = "MC/{mode}-sqDalitz/cuts.yaml",
         branches = "MC/{mode}-sqDalitz/branches.yaml",
-        files = "/data5/lhcb/zhoutw/B2DDbarpi/MC_download/{mode}-sqDalitz/{mode}-sqDalitz_{year}_{mag}_pidcorr.root",
+        #files = "/data5/lhcb/zhoutw/B2DDbarpi/MC_download/{mode}-sqDalitz/{mode}-sqDalitz_{year}_{mag}_pidcorr.root",
+        files = "/data5/lhcb/zhoutw/B2DDbarpi/snakemake_chain/production/output/PIDCorr/{mode}-sqDalitz/{mode}-sqDalitz_{year}_{mag}_pidcorr.root"
     output:
         files = output_path("preselection/MC/{mode}/{mode}_{year}_{mag}.root"),
         logs = output_path("preselection/MC/{mode}/logs/{mode}_{year}_{mag}.log"),

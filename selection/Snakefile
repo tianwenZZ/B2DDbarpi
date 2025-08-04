@@ -46,11 +46,14 @@ include: "checks/Snakefile"
 
 rule all:
     input:
-        #expand(rules.merge_data.output.files, mode=config["mc_modes"]),
-        #expand(rules.merge_MC.output.files, mode=config["mc_modes"]),
+        expand(rules.merge_data.output.files, mode=config["mc_modes"]),
+        expand(rules.merge_MC.output.files, mode=config["mc_modes"]),
         expand(rules.presel_eff_MC.output.files, mode=config["mc_modes"]),
         expand(rules.presel_eff_data.output.files, mode=config["mc_modes"]),
         expand(rules.draw_fom_curve.output.files, mode=config["mc_modes"]),
-        expand(rules.plot_misID_shape.output.files, misid_mode=config["misID_modes"]),
+        #expand(rules.plot_misID_shape.output.files, misid_mode=config["misID_modes"]),
+        #expand(rules.massfit_MC_float.output.files, mode="B2D0D0pi2b4b"),
         expand(rules.fit_data_sw.output.files, mode=config["massfit_modes"]),
-        #expand(rules.check_data_Dalitz.output.file_dir, mode="B2D0D0pi2b2b"),
+        #expand(rules.check_Bmass_afterMVA.output.file_dir, mode=config["mc_modes"]),
+        #expand(rules.check_data_Dalitz.output.file_dir, mode="B2DDpi"),
+        #expand(rules.check_fit_data_sw.output.files, mode="B2D0D0pi2b2b"),
