@@ -21,14 +21,18 @@ Available wildcards are defined in config.yaml
 #            print(rule.name)
 #            print(rule.docstring)
 
-MCID=list(range(309,354))+list(range(361,388))
-
+#MCID=list(range(309,354))+list(range(361,388))+[392,394,396,398,400,404,405,407]
+MCID=[390,392,394]+list(range(395,414))
 
 include: "download/Snakefile"
 include: "PIDCorr/Snakefile"
+include: "merge/Snakefile"
 
 rule all:
     input:
         #expand(rules.merge_MC.output.files, mode=config["mc_modes"], year=config["years"], mag=config["polarities"]),
-        #expand(rules.PIDCorr.output.files, mode="B2DDpi", year="2015", mag="md"),
-        expand(rules.PIDCorr.output.files, mode=config["mc_modes"], year=config["years"], mag=config["polarities"])
+        #expand(rules.merge_MC.output.files, mode=["B2D0D0bpi2b4b","B2D0D0bpi4b2b"], year=config["years"], mag=config["polarities"]),
+        #expand(rules.PIDCorr.output.files, mode=["B2D0D0bpi2b4b","B2D0D0bpi4b2b"], year=config["years"], mag=config["polarities"]),
+        expand(rules.merge_2b4b_MC.output.files, year=config["years"], mag=config["polarities"] ),
+        expand(rules.merge_PIDCorr_MC.output.files, mode=config["mc_modes"] ),
+        #expand(rules.PIDCorr.output.files, mode=config["mc_modes"], year=config["years"], mag=config["polarities"])

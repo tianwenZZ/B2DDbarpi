@@ -13,6 +13,7 @@ mc_modes:
   - B2DDpi
   - B2DpDstmpi
   - B2D0D0pi2b2b
+  - B2D0D0pi2b4b
   - B2DstpDmpi
   - B2DstDstpi
 
@@ -31,11 +32,13 @@ misID_modes:
 massfit_modes:
   - B2DDpi
   - B2D0D0pi2b2b
+  - B2D0D0pi2b4b
 
 
 working_points_BDT:
     "B2DDpi": 0.12
     "B2D0D0pi2b2b": 0.08
+    "B2D0D0pi2b4b": 0.15
     "B2DpDstmpi": 0.2
     "B2DstpDmpi": 0.2
     "B2DstDstpi": -9999 

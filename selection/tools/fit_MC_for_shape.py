@@ -29,7 +29,9 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
     nbins = 50
     xlow, xup = 5250, 5315
     xtitle = {"B2DDpi": "m(D^{+}D^{-}#pi^{+}) [MeV/c^{2}]",
-              "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
+              "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]",
+              "B2D0D0pi2b4b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"
+              }
 
     x = RooRealVar("B_PVF_M", "mass", xlow, xup)
     
@@ -60,8 +62,8 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
 
     signal1 = RooGaussian("signal1", "Gaussian pdf", x, mean, sigma1)
     signal2 = RooGaussian("signal2", "Gaussian pdf", x, mean, sigma2)
-    signal = RooAddPdf("signal", "two gaus", [signal1, signal2], [frac])
-
+    #signal = RooAddPdf("signal", "two gaus", [signal1, signal2], [frac])
+    signal = RooAddPdf("signal", "two gaus", RooArgList(signal1, signal2), RooArgList(frac))
 
     # read parameters in
     # The input func file determines the final setting of params, even if a1
@@ -70,7 +72,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
         params = signal.getParameters(x)
         params.readFromFile(in_func)
 
-    r = signal.fitTo(data, Save = True)
+    r = signal.fitTo(data, rf.Save())
     r.Print()
     params = signal.getParameters(x)
     params.writeToFile(out_func)
