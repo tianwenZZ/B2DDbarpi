@@ -1,0 +1,49 @@
+MC_B2D0D0pi2b4b-sqDalitz:
+
+  # trigger
+  "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
+  "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
+  "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
+
+  # truthmath
+  "particle_trueid": "abs(D2bK_TRUEID)==321 && abs(D2bH_TRUEID)==211 \
+                     && abs(D4bHp_TRUEID)==211 && abs(D4bK_TRUEID)==321 && abs(D4bHm1_TRUEID)==211 && abs(D4bHm2_TRUEID)==211 \
+                     && abs(BH_TRUEID)==211 && abs(D2b_TRUEID)==421 && abs(D4b_TRUEID)==421"
+  "mother_trueid": "D2b_MC_MOTHER_ID==B_TRUEID && D4b_MC_MOTHER_ID==B_TRUEID && BH_MC_MOTHER_ID==B_TRUEID \
+                    && D2bK_MC_MOTHER_ID==D2b_TRUEID && D2bH_MC_MOTHER_ID==D2b_TRUEID \
+                    && D4bK_MC_MOTHER_ID==D4b_TRUEID && D4bHp_MC_MOTHER_ID==D4b_TRUEID && D4bHm1_MC_MOTHER_ID==D4b_TRUEID && D4bHm2_MC_MOTHER_ID==D4b_TRUEID"
+  "mother_key": "D2bK_MC_MOTHER_KEY==D2bH_MC_MOTHER_KEY \
+                && D4bHp_MC_MOTHER_KEY==D4bK_MC_MOTHER_KEY && D4bHm1_MC_MOTHER_KEY==D4bK_MC_MOTHER_KEY && D4bHm2_MC_MOTHER_KEY==D4bK_MC_MOTHER_KEY\
+                && D2b_MC_MOTHER_KEY==D4b_MC_MOTHER_KEY && D4b_MC_MOTHER_KEY==BH_MC_MOTHER_KEY"
+
+
+  #DaVinci
+  "DaVinci_pid_cut_K": "D2bK_ProbNNk_corr>0.1 && D2bK_ProbNNk_corr<1 \
+                        && D4bK_ProbNNk_corr>0.1 && D4bK_ProbNNk_corr<1"
+  "DaVinci_pid_cut_pi": "D2bH_ProbNNpi_corr>0.05 && D2bH_ProbNNpi_corr<1 \
+                        && D4bHp_ProbNNpi_corr>0.05 && D4bHp_ProbNNpi_corr<1 \
+                        && D4bHm1_ProbNNpi_corr>0.05 && D4bHm1_ProbNNpi_corr<1 \
+                        && D4bHm2_ProbNNpi_corr>0.05 && D4bHm2_ProbNNpi_corr<1 \
+                        && BH_ProbNNpi_corr>0.05 && BH_ProbNNpi_corr<1"
+  "combined pi pid cut": "D2bH_ProbNNpi_corr * ( 1 - D2bH_ProbNNk_corr )>0.2 \
+                         && D4bHp_ProbNNpi_corr * ( 1 - D4bHp_ProbNNk_corr )>0.2 && D4bHm1_ProbNNpi_corr * ( 1- D4bHm1_ProbNNk_corr )>0.2 && D4bHm2_ProbNNpi_corr * ( 1 - D4bHm2_ProbNNk_corr )>0.2 \
+                         && BH_ProbNNpi_corr * ( 1- BH_ProbNNk_corr )>0.2" 
+
+  # preselection:
+  "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"
+  "D candidates": "D2b_IPCHI2_OWNPV<100000 && D2b_IPCHI2_OWNPV>0 && D4b_IPCHI2_OWNPV<100000 && D4b_IPCHI2_OWNPV>0 && D2b_M>1845 && D2b_M<1885 && D4b_M>1845 && D4b_M<1885"
+  "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
+  "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
+                        && calculateEta(D2bK_PZ, D2bK_P)>2 && calculateEta(D2bK_PZ, D2bK_P)<5 \
+                        && calculateEta(D2bH_PZ, D2bH_P)>2 && calculateEta(D2bH_PZ, D2bH_P)<5 \
+                        && calculateEta(D4bK_PZ, D4bK_P)>2 && calculateEta(D4bK_PZ, D4bK_P)<5 \
+                        && calculateEta(D4bHp_PZ, D4bHp_P)>2 && calculateEta(D4bHp_PZ, D4bHp_P)<5\
+                        && calculateEta(D4bHm1_PZ, D4bHm1_P)>2 && calculateEta(D4bHm1_PZ, D4bHm1_P)<5\
+                        && calculateEta(D4bHm2_PZ, D4bHm2_P)>2 && calculateEta(D4bHm2_PZ, D4bHm2_P)<5"
+
+  "Charged tracks ipchi2": "D2bK_IPCHI2_OWNPV<100000 && D2bK_IPCHI2_OWNPV>0 \
+                            && D2bH_IPCHI2_OWNPV<100000 && D2bH_IPCHI2_OWNPV>0 \
+                            && D4bK_IPCHI2_OWNPV<100000 && D4bK_IPCHI2_OWNPV>0 \
+                            && D4bHp_IPCHI2_OWNPV<100000 && D4bHp_IPCHI2_OWNPV>0 \
+                            && D4bHm1_IPCHI2_OWNPV<100000 && D4bHm1_IPCHI2_OWNPV>0 \
+                            && D4bHm2_IPCHI2_OWNPV<100000 && D4bHm2_IPCHI2_OWNPV>0"

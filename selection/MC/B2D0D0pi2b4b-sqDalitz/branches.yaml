@@ -1,0 +1,138 @@
+MC_B2D0D0pi2b4b-sqDalitz:
+    # branches to add
+    "B_PVF_M": "B_PVFitD_M[0]"
+    "B_M": "B_M"
+    "D2b_M": "D2b_M"
+    "D4b_M": "D4b_M"
+    #define 4-vectors
+    "vec4_D2bK": "TLorentzVector(
+        D2bK_PX,
+        D2bK_PY,
+        D2bK_PZ,
+        sqrt(D2bK_PX*D2bK_PX+D2bK_PY*D2bK_PY+D2bK_PZ*D2bK_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_D2bH": "TLorentzVector(
+        D2bH_PX,
+        D2bH_PY,
+        D2bH_PZ,
+        sqrt(D2bH_PX*D2bH_PX+D2bH_PY*D2bH_PY+D2bH_PZ*D2bH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bK": "TLorentzVector(
+        D4bK_PX,
+        D4bK_PY,
+        D4bK_PZ,
+        sqrt(D4bK_PX*D4bK_PX+D4bK_PY*D4bK_PY+D4bK_PZ*D4bK_PZ+{K_MASS}*{K_MASS}))"
+    "vec4_D4bHp": "TLorentzVector(
+        D4bHp_PX,
+        D4bHp_PY,
+        D4bHp_PZ,
+        sqrt(D4bHp_PX*D4bHp_PX+D4bHp_PY*D4bHp_PY+D4bHp_PZ*D4bHp_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bHm1": "TLorentzVector(
+        D4bHm1_PX,
+        D4bHm1_PY,
+        D4bHm1_PZ,
+        sqrt(D4bHm1_PX*D4bHm1_PX+D4bHm1_PY*D4bHm1_PY+D4bHm1_PZ*D4bHm1_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bHm2": "TLorentzVector(
+        D4bHm2_PX,
+        D4bHm2_PY,
+        D4bHm2_PZ,
+        sqrt(D4bHm2_PX*D4bHm2_PX+D4bHm2_PY*D4bHm2_PY+D4bHm2_PZ*D4bHm2_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_H": "TLorentzVector(
+        BH_PX,
+        BH_PY,
+        BH_PZ,
+        sqrt(BH_PX*BH_PX+BH_PY*BH_PY+BH_PZ*BH_PZ+{PI_MASS}*{PI_MASS}))"
+    "vec4_D4bK_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_Kplus_PX[0],
+        B_PVFitB_Lambda_cplus_Kplus_PY[0],
+        B_PVFitB_Lambda_cplus_Kplus_PZ[0],
+        B_PVFitB_Lambda_cplus_Kplus_PE[0])"
+    "vec4_D4bH_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_piplus_PX[0],
+        B_PVFitB_Lambda_cplus_piplus_PY[0],
+        B_PVFitB_Lambda_cplus_piplus_PZ[0],
+        B_PVFitB_Lambda_cplus_piplus_PE[0])"
+    "vec4_D4bH0_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_piplus_0_PX[0],
+        B_PVFitB_Lambda_cplus_piplus_0_PY[0],
+        B_PVFitB_Lambda_cplus_piplus_0_PZ[0],
+        B_PVFitB_Lambda_cplus_piplus_0_PE[0])"
+    "vec4_D4bH1_PVFitB": "TLorentzVector(
+        B_PVFitB_Lambda_cplus_piplus_1_PX[0],
+        B_PVFitB_Lambda_cplus_piplus_1_PY[0],
+        B_PVFitB_Lambda_cplus_piplus_1_PZ[0],
+        B_PVFitB_Lambda_cplus_piplus_1_PE[0])"
+    "vec4_D2bK_PVFitB": "TLorentzVector(
+        B_PVFitB_D0_Kplus_PX[0],
+        B_PVFitB_D0_Kplus_PY[0],
+        B_PVFitB_D0_Kplus_PZ[0],
+        B_PVFitB_D0_Kplus_PE[0])"
+    "vec4_D2bH_PVFitB": "TLorentzVector(
+        B_PVFitB_D0_piplus_PX[0],
+        B_PVFitB_D0_piplus_PY[0],
+        B_PVFitB_D0_piplus_PZ[0],
+        B_PVFitB_D0_piplus_PE[0])"
+    "vec4_D2b_PVFitB": "vec4_D2bK_PVFitB+vec4_D2bH_PVFitB"
+    "vec4_D4b_PVFitB": "vec4_D4bK_PVFitB+vec4_D4bH_PVFitB+vec4_D4bH0_PVFitB+vec4_D4bH1_PVFitB"
+    "vec4_BH_PVFitB": "TLorentzVector(
+        B_PVFitB_piplus_PX[0],
+        B_PVFitB_piplus_PY[0],
+        B_PVFitB_piplus_PZ[0],
+        B_PVFitB_piplus_PE[0])"
+
+    #for very loose selection
+    
+    # for MVA
+    "B_DiraAngle": "B_DiraAngle"
+    "B_IPCHI2_OWNPV": "B_IPCHI2_OWNPV"
+    "B_ENDVERTEX_CHI2": "B_ENDVERTEX_CHI2"
+    "logB_fdchi2": "log(B_FDCHI2_OWNPV)"
+    "D2b_ZFDsig": "(D2b_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D2b_ENDVERTEX_ZERR*D2b_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logD2bipchi2pv": "log(D2b_IPCHI2_OWNPV)"
+    #"logD2bProdMINipchi2": "log(D2bK_IPCHI2_OWNPV*(D2bK_IPCHI2_OWNPV<D2bH_IPCHI2_OWNPV)+D2bH_IPCHI2_OWNPV*(D2bH_IPCHI2_OWNPV<D2bK_IPCHI2_OWNPV))"
+    "logD2bProdMINipchi2": "log(find2Min(D2bK_IPCHI2_OWNPV, D2bH_IPCHI2_OWNPV))"
+    #"minD2bProdPT": "D2bK_PT*(D2bK_PT<D2bH_PT)+D2bH_PT*(D2bH_PT<D2bK_PT)"
+    "minD2bProdPT": "find2Min(D2bK_PT, D2bH_PT)"
+    "D4b_ZFDsig": "(D4b_ENDVERTEX_Z-B_ENDVERTEX_Z)/sqrt(D4b_ENDVERTEX_ZERR*D4b_ENDVERTEX_ZERR+B_ENDVERTEX_ZERR*B_ENDVERTEX_ZERR)"
+    "logD4bipchi2pv": "log(D4b_IPCHI2_OWNPV)"
+    "logD4bProdMINipchi2": "log(find4Min(D4bK_IPCHI2_OWNPV, D4bHp_IPCHI2_OWNPV, D4bHm1_IPCHI2_OWNPV, D4bHm2_IPCHI2_OWNPV))"
+    "minD4bProdPT": "find4Min(D4bK_PT, D4bHp_PT, D4bHm1_PT, D4bHm2_PT)"
+    "logBH_ipchi2pv": "log(BH_IPCHI2_OWNPV)"    
+    "logBH_PT": "log(BH_PT)"
+
+    # for Dalitz variables and helicity angles
+    # "B_PVFitB_D0_Kplus_ID*B_ID<0" means D0 (D2b) is D0, and D4b is anti-D0.
+    # We define B+ -> D1 D2 pi+(3), where D1(D0) is same charge as B+ and D2(D0bar) is opposite charge as B+.
+    "m12": "(vec4_D2b_PVFitB+vec4_D4b_PVFitB).M()/1000"
+    "m13": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()/1000
+            +(B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()/1000" # For B+->D0(Kpi)D0b(K3pi)pi+ MC, D2b refers to D0 exclusively. (thus D4b refers to D0b). We write m13 and m23 with conditional statement just for a more general expression.
+    "m23": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*(vec4_D4b_PVFitB+vec4_BH_PVFitB).M()/1000
+            +(B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*(vec4_D2b_PVFitB+vec4_BH_PVFitB).M()/1000"
+    "cosHel12": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*cosHel(vec4_D2b_PVFitB, vec4_D4b_PVFitB, vec4_BH_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*cosHel(vec4_D4b_PVFitB, vec4_D2b_PVFitB, vec4_BH_PVFitB)"
+    "cosHel13": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB)"
+    "cosHel23": "(B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*cosHel(vec4_BH_PVFitB, vec4_D4b_PVFitB, vec4_D2b_PVFitB) + 
+    (B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*cosHel(vec4_BH_PVFitB, vec4_D2b_PVFitB, vec4_D4b_PVFitB)"
+    "m12Sq": "m12*m12"
+    "m13Sq": "m13*m13"
+    "m23Sq": "m23*m23"
+    "pq13": "getpq(m13, (B_PVFitB_D0_Kplus_ID[0]*B_ID<0)*vec4_D2b_PVFitB.M()/1000+(B_PVFitB_D0_Kplus_ID[0]*B_ID>0)*vec4_D4b_PVFitB.M()/1000, vec4_BH_PVFitB.M()/1000)"
+
+    # for pid corr variables. data probNNCorr= probNN for the convenience of further analysis like MVA.
+    "D2bK_ProbNNk_corr": "D2bK_ProbNNk_corr"
+    "D2bK_ProbNNpi_corr": "D2bK_ProbNNpi_corr"
+    "D4bK_ProbNNk_corr": "D4bK_ProbNNk_corr"
+    "D4bK_ProbNNpi_corr": "D4bK_ProbNNpi_corr"
+    "D2bH_ProbNNpi_corr": "D2bH_ProbNNpi_corr"
+    "D2bH_ProbNNk_corr": "D2bH_ProbNNk_corr"
+    "D4bHp_ProbNNpi_corr": "D4bHp_ProbNNpi_corr"
+    "D4bHp_ProbNNk_corr": "D4bHp_ProbNNk_corr"
+    "D4bHm1_ProbNNpi_corr": "D4bHm1_ProbNNpi_corr"
+    "D4bHm1_ProbNNk_corr": "D4bHm1_ProbNNk_corr"
+    "D4bHm2_ProbNNpi_corr": "D4bHm2_ProbNNpi_corr"
+    "D4bHm2_ProbNNk_corr": "D4bHm2_ProbNNk_corr"
+    "BH_ProbNNpi_corr": "BH_ProbNNpi_corr"
+    "BH_ProbNNk_corr": "BH_ProbNNk_corr"
+
+    # ID variables
+    "B_PVFitB_D0_Kplus_ID": "B_PVFitB_D0_Kplus_ID"
+    "B_ID": "B_ID"

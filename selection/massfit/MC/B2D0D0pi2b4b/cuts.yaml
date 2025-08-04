@@ -1,0 +1,4 @@
+B2D0D0pi2b4b:
+    "MVA": "BDT>0.15"
+    #"combined pid": "D1H_ProbNNpi_corr * ( 1 - D1H_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr * ( 1 - D2H_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr * ( 1- BH_ProbNNk_corr )>0.2" # have been added in preselection
+    #"mass window": "B_PVFitD_M[0]>5259 && B_PVFitD_M[0]<5299"
