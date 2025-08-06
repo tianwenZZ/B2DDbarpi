@@ -76,7 +76,7 @@ def Fit(input_files, input_tree,
     for m in method_config.keys():
         arr_mass = arr_mass[(arr_mass > xlow) & (
             arr_mass < xup) & (arr[m] > method_config[m])]
-        data = RooDataSet.from_numpy({"mB": arr_mass}, mB)
+        data = RooDataSet.from_numpy({"mB": arr_mass}, [mB])
         nentries = data.numEntries()
         print(f"{nentries} events to be fit...")
 

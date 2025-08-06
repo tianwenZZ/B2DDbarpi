@@ -41,7 +41,7 @@ include: "presel_eff/Snakefile"
 include: "mva/Snakefile"
 include: "misID/Snakefile"
 include: "massfit/Snakefile"
-include: "checks/Snakefile"
+#include: "checks/Snakefile"
 
 
 rule all:
@@ -52,7 +52,6 @@ rule all:
         expand(rules.presel_eff_data.output.files, mode=config["mc_modes"]),
         expand(rules.draw_fom_curve.output.files, mode=config["mc_modes"]),
         #expand(rules.plot_misID_shape.output.files, misid_mode=config["misID_modes"]),
-        #expand(rules.massfit_MC_float.output.files, mode="B2D0D0pi2b4b"),
         expand(rules.fit_data_sw.output.files, mode=config["massfit_modes"]),
         #expand(rules.check_Bmass_afterMVA.output.file_dir, mode=config["mc_modes"]),
         #expand(rules.check_data_Dalitz.output.file_dir, mode="B2DDpi"),

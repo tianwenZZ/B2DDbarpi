@@ -5,6 +5,7 @@ import argparse
 import yaml
 import json
 import math
+import sys, os
 
 
 from ROOT import (vector, RooRealVar, RooDataSet, RooDataHist, gSystem,
@@ -14,13 +15,14 @@ from ROOT import (vector, RooRealVar, RooDataSet, RooDataHist, gSystem,
 import ROOT as rt
 from ROOT import RooFit as rf
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utilities import draw_pull
 
 gROOT.ProcessLine(".x ~/lhcbStyle.C")
+gROOT.ProcessLine(".x /home/zhoutw/workdir/B2DDbarpi/git-repo/selection/tools/fit/RooCruijffPdf.cxx")
 
 
-def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, output_files, output_tree_name, frac_, a1_):
-    gROOT.SetBatch(1)
+def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, output_files, output_tree_name):
     # batch mode
     gROOT.SetBatch(1)
     # rt.RooMsgService.instance().setGlobalKillBelow(rf.FATAL)
@@ -31,9 +33,10 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     # configs
     nbins = 40
     xlow, xup = 5250, 5450
-    xtitle = {"B2DDpi": "m(D^{+}D^{-}#pi^{+}) [MeV/c^{2}]",
-              "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]",
-              "B2D0D0pi2b4b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"}
+    xtitle = {"B2DDpi": "#it{m}_{#it{D}^{+}#it{D}^{#minus}#it{#pi}^{+}} [MeV/#it{c}^{2}]",
+              "B2D0D0pi2b2b": "#it{m}_{#it{D}^{0} #bar{#it{D}}^{0}#it{#pi}^{+}} [MeV/#it{c}^{2}]",
+              "B2D0D0pi2b4b": "#it{m}_{#it{D}^{0} #bar{#it{D}}^{0}#it{#pi}^{+}} [MeV/#it{c}^{2}]"
+              }
 
     x = RooRealVar("B_PVF_M", "mass", xlow, xup)
 
@@ -59,25 +62,25 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
 
     # Signal pdf
     mean = RooRealVar("mean", "mean", 5279, xlow, xup)
-    sigma1 = RooRealVar("sigma1", "sigma1", 11., 0.1, 20)
-    a0 = RooRealVar("a0", "a0", 0.)
-    a1 = RooRealVar("a1", "a1", 0.5, 0.01, 1.)
-    sigma2 = RooPolyVar("sigma2", "sigma2", sigma1, RooArgSet(a0, a1))
-    frac = RooRealVar("frac", "", 0.3, 0.01, 1.)
 
-    signal1 = RooGaussian("signal1", "Gaussian pdf", x, mean, sigma1)
-    signal2 = RooGaussian("signal2", "Gaussian pdf", x, mean, sigma2)
-    signal = RooAddPdf("signal", "two gaus", RooArgList(
-        signal1, signal2), RooArgList(frac))
+    sigmaL = RooRealVar("sigmaL", "sigmaL", 8.9, 0.1, 20)
+    sigmaR = RooRealVar("sigmaR", "sigmaR", 8.9, 0.1, 20) 
+    nl = RooRealVar("nl", "nl", 70.,0.,140.)
+    nr = RooRealVar("nr", "nr", 70.,0.,140.)
+    al = RooRealVar("al", "al", 1.39, 0, 20)
+    ar = RooRealVar("ar", "ar", 1.55, 0, 20)
+
+    signal = rt.RooCruijffPdf("signal", "cruijff pdf", x, mean, sigmaL, sigmaR, al, ar)
+
 
     # read parameters in
     if in_func:
         params = signal.getParameters(x)
         params.readFromFile(in_func)
         for par in params:
-            if par.GetName()=="a1":
+            if par.GetName()=="al":
                 par.setConstant()
-            if par.GetName()=="frac":
+            if par.GetName()=="ar":
                 par.setConstant()
         
 
@@ -96,17 +99,13 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
     output_params = model.getParameters(x)
     output_params.writeToFile(out_func)
 
-    from math import sqrt
-    reso = sqrt(frac.getVal()*sigma1.getVal()**2 +
-                (1-frac.getVal())*(a1.getVal()*sigma1.getVal())**2)
-    print("The resolution of signal peak is: ", reso)
 
     # Plot the fit results
     xframe = x.frame(Title="PDF fit", Bins=nbins)
     xframe.SetXTitle(xtitle[mode])
     xframe.SetYTitle("Events")
     data.plotOn(xframe, Name="data_fit", MarkerSize=0.8)
-    model.plotOn(xframe, Components={signal1, signal2}, Name="signal", LineColor="kBlack", LineStyle="--")
+    model.plotOn(xframe, Components={signal}, Name="signal", LineColor="kBlack", LineStyle="--")
     model.plotOn(xframe, Components={combin_bkg}, Name="combin_bkg", LineColor="kMagenta", LineStyle="--")
     model.plotOn(xframe, Name="Total fit", LineColor="kRed", LineStyle="-")
     data.plotOn(xframe)
@@ -137,7 +136,7 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, cfit_figs, outpu
         pad2.SetBottomMargin(0.6)
         pad2.Draw()
         pad2.cd()
-        pull = draw_pull(xframe, xx, xframe.GetXaxis().GetTitle())
+        pull = draw_pull(xframe, xx,  "data_fit", "Total fit", xframe.GetXaxis().GetTitle())
         pull.Draw()
         ln = TLine()
         ln.SetLineColor(rt.kBlack)
@@ -200,10 +199,6 @@ if __name__ == '__main__':
     parser.add_argument('--output-tree-name',
                         default='DecayTree',
                         help='Name of the tree')
-    parser.add_argument('--frac_', type=float,
-                        help='Fixed value of frac if fixed')
-    parser.add_argument('--a1_', type=float,
-                        help='Fixed value of a1 if fixed')
     args = parser.parse_args()
 
     fit(**vars(args))

@@ -17,43 +17,26 @@ rule apply_cuts_prefit_MC:
                                 --mode {wildcards.mode} \
                                 --selection-files {input.cuts} | tee {output.logs}'
 
-rule massfit_MC_float:
+rule massfit_MC:
     '''
     Mass fit of MC
     '''
     input:
-        script = "tools/fit_MC_for_shape.py",
+        script = "tools/run_fitmc.py",
         files = rules.apply_cuts_prefit_MC.output.files,
-    output:
-        funcs = output_path("massfit/MC/{mode}/shape_float/mc_shape.txt"),
-        files = output_path("massfit/MC/{mode}/shape_float/fit_Bmass.pdf"),
-        logs = output_path("massfit/MC/{mode}/shape_float/logs/fit_Bmass.log"),
-    shell:
-        'python3 {input.script} --input-files {input.files} \
-                                --out-func {output.funcs} \
-                                --output-files {output.files} \
-                                --mode {wildcards.mode} | tee {output.logs}'
-
-rule massfit_MC_frac_fixed:
-    '''
-    Mass fit of MC with fraction fixed, to determine the fraction of sigma2/sigma1.
-    '''
-    input:
-        script = "tools/fit_MC_for_shape.py",
-        files = rules.apply_cuts_prefit_MC.output.files,
-        prerequisites = rules.massfit_MC_float.output.logs,
     params:
-        frac = 0.3,
+        method = lambda wildcards: config["massfit"][wildcards.mode]["method"],
     output:
-        funcs = output_path("massfit/MC/{mode}/shape_fixed/mc_shape_frac_fixed.txt"),
-        files = output_path("massfit/MC/{mode}/shape_fixed/fit_Bmass_frac_fixed.pdf"),
-        logs = output_path("massfit/MC/{mode}/shape_fixed/logs/fit_Bmass_frac_fixed.log"),
+        funcs = output_path("massfit/MC/{mode}/mc_shape.txt"),
+        files = output_path("massfit/MC/{mode}/fit_Bmass.pdf"),
+        logs = output_path("massfit/MC/{mode}/logs/fit_Bmass.log"),
     shell:
         'python3 {input.script} --input-files {input.files} \
                                 --out-func {output.funcs} \
                                 --output-files {output.files} \
                                 --mode {wildcards.mode} \
-                                --frac {params.frac} | tee {output.logs}'
+                                --method {params.method} | tee {output.logs}'
+
 
 
 rule apply_cuts_prefit_data:
@@ -78,9 +61,11 @@ rule fit_data_sw:
     S-Fit the data sample.
     '''
     input:
-        script = "tools/fit_mass_sweight.py",
+        script = "tools/run_fitdata.py",
         files = rules.apply_cuts_prefit_data.output.files,
-        funcs = rules.massfit_MC_frac_fixed.output.funcs,
+        funcs = rules.massfit_MC.output.funcs,
+    params:
+        method = lambda wildcards: config["massfit"][wildcards.mode]["method"],
     output:
         files = output_path("massfit/data/{mode}/data_sw.root"),
         logs = output_path("massfit/data/{mode}/logs/fit_Bmass.log"),
@@ -92,5 +77,6 @@ rule fit_data_sw:
                                 --mode {wildcards.mode} \
                                 --out-func {output.funcs} \
                                 --cfit-figs {output.cfit_figs} \
+                                --method {params.method} \
                                 --output-files {output.files} | tee {output.logs}'
 

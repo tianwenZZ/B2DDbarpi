@@ -43,10 +43,10 @@ def load_data(treename, files):
     return tree
 
 
-def draw_pull(plot, xx, xtitle):
-    hpull = plot.pullHist()
+def draw_pull(plot, xx, data_name, fit_name, xtitle):
+    hpull = plot.pullHist(data_name, fit_name)
     hpull.SetFillColor(1)
-
+    
     frame = xx.frame(ROOT.RooFit.Title("pull"))
     frame.GetXaxis().SetTitle(xtitle)
     frame.GetYaxis().SetTitle("pull")

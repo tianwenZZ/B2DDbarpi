@@ -11,11 +11,11 @@ polarities:
 
 mc_modes:
   - B2DDpi
-  - B2DpDstmpi
+    #- B2DpDstmpi
   - B2D0D0pi2b2b
   - B2D0D0pi2b4b
-  - B2DstpDmpi
-  - B2DstDstpi
+    #- B2DstpDmpi
+    #- B2DstDstpi
 
 data_modes:
   - B2DdDdPi
@@ -38,7 +38,18 @@ massfit_modes:
 working_points_BDT:
     "B2DDpi": 0.12
     "B2D0D0pi2b2b": 0.08
-    "B2D0D0pi2b4b": 0.15
+    "B2D0D0pi2b4b": 0.14
     "B2DpDstmpi": 0.2
     "B2DstpDmpi": 0.2
     "B2DstDstpi": -9999 
+
+
+massfit:
+  B2DDpi:
+    method: "2gaus"
+    frac: 0.3
+  B2D0D0pi2b2b:
+    method: "2gaus"
+    frac: 0.3
+  B2D0D0pi2b4b:
+    method: "cruijff"

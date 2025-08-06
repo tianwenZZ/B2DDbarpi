@@ -4,6 +4,7 @@ import time
 import argparse
 import yaml
 import json
+import sys, os
 import math
 
 from ROOT import (vector, RooRealVar, RooDataSet, RooDataHist, gSystem,
@@ -12,6 +13,8 @@ from ROOT import (vector, RooRealVar, RooDataSet, RooDataHist, gSystem,
 import ROOT as rt
 from ROOT import RooFit as rf
 
+#from ..utilities import draw_pull
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from utilities import draw_pull
 
 gROOT.ProcessLine(".x ~/lhcbStyle.C")
@@ -22,15 +25,13 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
     gROOT.SetBatch(1)
     # rt.RooMsgService.instance().setGlobalKillBelow(rf.FATAL)
 
-    # set lhcb style
-    gROOT.ProcessLine(".x ~/lhcbStyle.C")
 
     # configs
     nbins = 50
     xlow, xup = 5250, 5315
-    xtitle = {"B2DDpi": "m(D^{+}D^{-}#pi^{+}) [MeV/c^{2}]",
-              "B2D0D0pi2b2b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]",
-              "B2D0D0pi2b4b": "m(D^{0} #bar{D}^{0}#pi^{+}) [MeV/c^{2}]"
+    xtitle = {"B2DDpi": "#it{m}_{#it{D}^{+}#it{D}^{#minus}#it{#pi}^{+}} [MeV/#it{c}^{2}]",
+              "B2D0D0pi2b2b": "#it{m}_{#it{D}^{0} #bar{#it{D}}^{0}#it{#pi}^{+}} [MeV/#it{c}^{2}]",
+              "B2D0D0pi2b4b": "#it{m}_{#it{D}^{0} #bar{#it{D}}^{0}#it{#pi}^{+}} [MeV/#it{c}^{2}]"
               }
 
     x = RooRealVar("B_PVF_M", "mass", xlow, xup)
@@ -83,14 +84,15 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
     print("The resolution of signal peak is: ", reso)
 
     # Plot the fit results
-    xframe = x.frame(Title="Signal pdf fit", Bins=nbins)
+    xframe = x.frame(Title="Signal pdf fit")
     xframe.SetXTitle(xtitle[mode])
     xframe.SetYTitle("Events")
-    data.plotOn(xframe, Name="data_fit", MarkerSize=0.8)
+    data.plotOn(xframe, Name="data_fit", MarkerSize=0.8, Binning=nbins)
     signal.plotOn(xframe, Components = {signal1}, Name = "Gaussian1", LineStyle = 10, LineColor = "kBlue")
     signal.plotOn(xframe, Components = {signal2}, Name = "Gaussian2", LineStyle = 10, LineColor = "kGreen")
     signal.plotOn(xframe, Name = "Total fit", LineColor = "kRed", LineStyle = "-")
-    data.plotOn(xframe)
+    data.plotOn(xframe, Name="data_fit", MarkerSize=0.8, Binning=nbins)
+    
 
     def DrawAll(xframe, xx, drawleg=True):
         can = TCanvas("can", "", 800, 700)
@@ -118,12 +120,13 @@ def fit(input_files, input_tree_name, mode, in_func,  out_func, output_files, fr
         pad2.SetBottomMargin(0.6)
         pad2.Draw()
         pad2.cd()
-        pull = draw_pull(xframe, xx, xframe.GetXaxis().GetTitle())
+        pull = draw_pull(xframe, xx, "data_fit", "Total fit", xframe.GetXaxis().GetTitle())
         pull.Draw()
         ln = TLine()
         ln.SetLineColor(rt.kBlack)
         ln.DrawLine(xlow, 0., xup, 0.)
         # It seems that legend object will be deleted outside the DrawAll function, and won't appear in the figure. So I print the Canvas inside the function.
+        
         can.Print(output_files)
 
     DrawAll(xframe, x, drawleg=True)
