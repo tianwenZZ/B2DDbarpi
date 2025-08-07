@@ -1,3 +1,5 @@
+# This workflow about misID check can only run at farm191!!! 
+
 import os
 
 workpath=os.path.dirname(workflow.snakefile)
