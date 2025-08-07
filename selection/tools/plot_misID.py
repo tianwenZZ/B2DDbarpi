@@ -9,10 +9,17 @@ from ROOT import (
     kBlack, kRed, kBlue,
     TCanvas,
     TH1F,
+    TLegend,
 )
 
 from utilities import read_from_yaml, load_data
 
+legend = {
+    "B2D0D0K": ["#it{B}^{+}#rightarrow #it{D}^{0} #bar{#it{D}}^{0} #it{K}^{+}", "#it{B}^{+}#rightarrow #it{D}^{0} #bar{#it{D}}^{0} #it{K}^{+} with #it{K}^{+} misID as #it{#pi}^{+}"],
+    "B2D0D0K2b4b": ["#it{B}^{+}#rightarrow #it{D}^{0} #bar{#it{D}}^{0} #it{K}^{+}", "#it{B}^{+}#rightarrow #it{D}^{0} #bar{#it{D}}^{0} #it{K}^{+} with #it{K}^{+} misID as #it{#pi}^{+}"],
+    "B2D0D0K4b2b": ["#it{B}^{+}#rightarrow #it{D}^{0} #bar{#it{D}}^{0} #it{K}^{+}", "#it{B}^{+}#rightarrow #it{D}^{0} #bar{#it{D}}^{0} #it{K}^{+} with #it{K}^{+} misID as #it{#pi}^{+}"],
+    "B2DDK": ["#it{B}^{+}#rightarrow #it{D}^{+} #it{D}^{#minus} #it{K}^{+}", "#it{B}^{+}#rightarrow #it{D}^{+} #it{D}^{#minus} #it{K}^{+} with #it{K}^{+} misID as #it{#pi}^{+}"]
+}
 
 def plot_misID_shape(input_files, input_tree_name,
                      output_file,
@@ -34,13 +41,13 @@ def plot_misID_shape(input_files, input_tree_name,
     h_mB = TH1F("h_mB", "histo of mB distribution", nbins, xlow, xup)
     h_Bpeak = TH1F("h_Bpeak", "histo of signal B peak", nbins, xlow, xup)
     # Set the attributes of histogram
-    h_mB0.GetXaxis().SetTitle("m(B^{+}) [MeV/c^{2}]")
+    h_mB0.GetXaxis().SetTitle("#it{m}_{#it{B}^{+}} [MeV/#it{c}^{2}]")
     h_mB0.GetYaxis().SetTitle("Events")
     h_mB0.SetLineColor(kBlack)
-    h_mB.GetXaxis().SetTitle("m(B^{+}) [MeV/c^{2}]")
+    h_mB.GetXaxis().SetTitle("#it{m}_{#it{B}^{+}} [MeV/#it{c}^{2}]")
     h_mB.GetYaxis().SetTitle("Events")
     h_mB.SetLineColor(kRed)
-    h_Bpeak.GetXaxis().SetTitle("m(B^{+}) [MeV/c^{2}]")
+    h_Bpeak.GetXaxis().SetTitle("#it{m}_{#it{B}^{+}} [MeV/#it{c}^{2}]")
     h_Bpeak.GetYaxis().SetTitle("Events")
     h_Bpeak.SetLineColor(kBlue)
 
@@ -49,6 +56,13 @@ def plot_misID_shape(input_files, input_tree_name,
     # tree.Draw(var+">>h_mB0","","same")
     tree.Draw(var+">>h_mB", cut, "same")
 
+    leg = TLegend(0.2,0.65,0.4,0.85)
+    leg.AddEntry(h_Bpeak, legend[mode][0], "l")
+    leg.AddEntry(h_mB, legend[mode][1], "l")
+    leg.SetTextFont(132)
+    leg.SetTextSize(0.04)
+    leg.Draw()
+    
     can.Print(output_file)
 
 

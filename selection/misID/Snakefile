@@ -21,7 +21,7 @@ rule plot_misID_shape:
     input:
         script = "tools/plot_misID.py",
         files = rules.generate_misID_toy.output.files_tree,
-        configs = "misID/config_plot_{misid_mode}.yaml",
+        configs = "misID/config_plot.yaml",
     output:
         files = output_path("misID/{misid_mode}/plot/mB.pdf"),
     shell:
