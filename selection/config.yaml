@@ -11,11 +11,11 @@ polarities:
 
 mc_modes:
   - B2DDpi
-    #- B2DpDstmpi
+  - B2DpDstmpi
   - B2D0D0pi2b2b
   - B2D0D0pi2b4b
-    #- B2DstpDmpi
-    #- B2DstDstpi
+  - B2DstpDmpi
+  - B2DstDstpi
 
 data_modes:
   - B2DdDdPi
@@ -27,7 +27,9 @@ data_modes:
 
 misID_modes:
   - B2DDK
-  - B2D0D0bK
+  - B2D0D0K
+  - B2D0D0K2b4b
+  - B2D0D0K4b2b
 
 massfit_modes:
   - B2DDpi
