@@ -1,0 +1,23 @@
+B2D0D0pi2b2b:
+
+  # trigger
+  "L0": "B_L0HadronDecision_TOS || B_L0Global_TIS"
+  "Hlt1": "B_Hlt1TrackMVADecision_TOS || B_Hlt1TwoTrackMVADecision_TOS"
+  "Hlt2": "B_Hlt2Topo2BodyDecision_TOS || B_Hlt2Topo3BodyDecision_TOS || B_Hlt2Topo4BodyDecision_TOS"
+
+  #DaVinci
+  "combined pi pid cut": "D1H_ProbNNpi_corr * ( 1 - D1H_ProbNNk_corr )>0.2 && D2H_ProbNNpi_corr * ( 1 - D2H_ProbNNk_corr )>0.2 && BH_ProbNNpi_corr * ( 1- BH_ProbNNk_corr )>0.2" 
+
+  # preselection: WITHOUT D mass window cuts!
+  "B candidate": "B_M>4800 && B_M<6950 && B_ENDVERTEX_CHI2<30"
+  "D candidates": "D1_IPCHI2_OWNPV<100000 && D1_IPCHI2_OWNPV>0 && D2_IPCHI2_OWNPV<100000 && D2_IPCHI2_OWNPV>0"
+  "Bachelor": "BH_IPCHI2_OWNPV<100000 && BH_IPCHI2_OWNPV>0"
+  "Charged tracks eta": "calculateEta(BH_PZ, BH_P)>2 && calculateEta(BH_PZ, BH_P)<5 \
+                        && calculateEta(D1K_PZ, D1K_P)>2 && calculateEta(D1K_PZ, D1K_P)<5 \
+                        && calculateEta(D1H_PZ, D1H_P)>2 && calculateEta(D1H_PZ, D1H_P)<5 \
+                        && calculateEta(D2K_PZ, D2K_P)>2 && calculateEta(D2K_PZ, D2K_P)<5 \
+                        && calculateEta(D2H_PZ, D2H_P)>2 && calculateEta(D2H_PZ, D2H_P)<5"
+  "Charged tracks ipchi2": "D1K_IPCHI2_OWNPV<100000 && D1K_IPCHI2_OWNPV>0 \
+                            && D1H_IPCHI2_OWNPV<100000 && D1H_IPCHI2_OWNPV>0 \
+                            && D2K_IPCHI2_OWNPV<100000 && D2K_IPCHI2_OWNPV>0 \
+                            && D2H_IPCHI2_OWNPV<100000 && D2H_IPCHI2_OWNPV>0"

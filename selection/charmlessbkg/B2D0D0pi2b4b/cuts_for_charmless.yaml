@@ -1,0 +1,11 @@
+ss:
+  "D mass window": "D2b_M>1845 && D2b_M<1885 && D4b_M>1845 && D4b_M<1885"
+
+sb:
+  "D mass window": "(B_ID*D2bK_ID<0)*((D2b_M>1845 && D2b_M<1885) && (D4b_M<1845 || D4b_M>1885)) || (B_ID*D2bK_ID>0)*((D4b_M>1845 && D4b_M<1885) && (D2b_M<1845 || D2b_M>1885))"
+
+bs:
+  "D mass window": "(B_ID*D2bK_ID>0)*((D2b_M>1845 && D2b_M<1885) && (D4b_M<1845 || D4b_M>1885)) || (B_ID*D2bK_ID<0)*((D4b_M>1845 && D4b_M<1885) && (D2b_M<1845 || D2b_M>1885))"
+
+bb:
+  "D mass window": "(D2b_M<1845 || D2b_M>1885) && (D4b_M<1845 || D4b_M>1885)"
